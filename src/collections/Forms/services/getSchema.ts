@@ -1,8 +1,8 @@
 import payload from 'payload'
 import type { Form } from 'payload/generated-types'
 
-const toSchema = ({ fields }: Form): any => {
-  const required = []
+const toSchema = ({ fields }: Form): { required: string[]; properties: object } => {
+  const required: string[] = []
   const properties = {}
   fields.forEach(field => {
     if (field.required) {
@@ -20,7 +20,7 @@ const toSchema = ({ fields }: Form): any => {
   return { required, properties }
 }
 
-export const getSchema = async (id: string): Promise<any> => {
+export const getSchema = async (id: string): Promise<object> => {
   try {
     const res = await payload.findByID({
       collection: 'forms',
