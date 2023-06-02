@@ -7,21 +7,72 @@
 
 export interface Config {
   collections: {
-    users: User
-  }
-  globals: {}
+    users: User;
+    forms: Form;
+  };
+  globals: {};
 }
 export interface User {
-  id: string
-  firstName?: string
-  lastName?: string
-  roles?: Array<'admin' | 'user'>
-  email?: string
-  resetPasswordToken?: string
-  resetPasswordExpiration?: string
-  loginAttempts?: number
-  lockUntil?: string
-  createdAt: string
-  updatedAt: string
-  password?: string
+  id: string;
+  firstName?: string;
+  lastName?: string;
+  roles?: ('admin' | 'user')[];
+  updatedAt: string;
+  createdAt: string;
+  email?: string;
+  resetPasswordToken?: string;
+  resetPasswordExpiration?: string;
+  loginAttempts?: number;
+  lockUntil?: string;
+  password?: string;
+}
+export interface Form {
+  id: string;
+  title: string;
+  description?: string;
+  type?: string;
+  fields?: (
+    | {
+        key: string;
+        title?: string;
+        description?: string;
+        default?: string;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'string-type';
+      }
+    | {
+        key: string;
+        title?: string;
+        description?: string;
+        default?: string;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'number-type';
+      }
+    | {
+        key: string;
+        title?: string;
+        description?: string;
+        default?: string;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'integer-type';
+      }
+    | {
+        key: string;
+        title?: string;
+        description?: string;
+        default?: string;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'boolean-type';
+      }
+  )[];
+  updatedAt: string;
+  createdAt: string;
 }
