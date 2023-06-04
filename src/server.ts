@@ -1,16 +1,14 @@
 import express from 'express'
-import path from 'path'
 import payload from 'payload'
+
+// eslint-disable-next-line
+require('dotenv').config()
 
 import { seed } from './seed'
 
-// eslint-disable-next-line
-require('dotenv').config({
-  path: path.resolve(__dirname, '../.env'),
-})
-
 const app = express()
 
+// Redirect root to Admin panel
 app.get('/', (_, res) => {
   res.redirect('/admin')
 })
@@ -26,11 +24,12 @@ const start = async (): Promise<void> => {
   })
 
   if (process.env.PAYLOAD_SEED === 'true') {
-    payload.logger.info('---- SEEDING DATABASE ----')
+    payload.logger.info('Seeding Payload...')
     await seed(payload)
+    payload.logger.info('Done.')
   }
 
-  app.listen(8000)
+  app.listen(process.env.PORT)
 }
 
 start()

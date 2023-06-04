@@ -1,24 +1,48 @@
 import type { CollectionConfig } from 'payload/types'
 
-import { admins } from '../access/admins'
-import adminsAndUser from '../access/adminsAndUser'
-import { anyone } from '../access/anyone'
-import { checkRole } from '../access/checkRole'
-import { loginAfterCreate } from './hooks/loginAfterCreate'
-import { protectRoles } from './hooks/protectRoles'
+import { admins } from '../../access/admins'
+import { anyone } from '../../access/anyone'
+import adminsAndUser from './access/adminsAndUser'
+import { checkRole } from './checkRole'
+import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
 
-export const Users: CollectionConfig = {
-  slug: 'users',
-  auth: {
-    tokenExpiration: 28800, // 8 hours
-    cookies: {
-      sameSite: 'none',
-      secure: true,
-      domain: process.env.COOKIE_DOMAIN,
+export const UserFields: CollectionConfig['fields'] = [
+  {
+    name: 'name',
+    type: 'text',
+  },
+  {
+    name: 'roles',
+    type: 'select',
+    hasMany: true,
+    saveToJWT: true,
+    hooks: {
+      beforeChange: [ensureFirstUserIsAdmin],
+    },
+    defaultValue: ['user'],
+    options: [
+      {
+        label: 'admin',
+        value: 'admin',
+      },
+      {
+        label: 'user',
+        value: 'user',
+      },
+    ],
+    access: {
+      read: admins,
+      create: admins,
+      update: admins,
     },
   },
+]
+
+const Users: CollectionConfig = {
+  slug: 'users',
   admin: {
-    useAsTitle: 'email',
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'email'],
   },
   access: {
     read: adminsAndUser,
@@ -27,35 +51,9 @@ export const Users: CollectionConfig = {
     delete: admins,
     admin: ({ req: { user } }) => checkRole(['admin'], user),
   },
-  hooks: {
-    afterChange: [loginAfterCreate],
-  },
-  fields: [
-    {
-      name: 'firstName',
-      type: 'text',
-    },
-    {
-      name: 'lastName',
-      type: 'text',
-    },
-    {
-      name: 'roles',
-      type: 'select',
-      hasMany: true,
-      hooks: {
-        beforeChange: [protectRoles],
-      },
-      options: [
-        {
-          label: 'Admin',
-          value: 'admin',
-        },
-        {
-          label: 'User',
-          value: 'user',
-        },
-      ],
-    },
-  ],
+  auth: true,
+  fields: UserFields,
+  timestamps: true,
 }
+
+export default Users

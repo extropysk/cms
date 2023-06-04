@@ -1,6 +1,6 @@
-import type { Access } from 'payload/config'
+import type { Access } from 'payload/types'
 
-import { checkRole } from './checkRole'
+import { checkRole } from '../checkRole'
 
 const adminsAndUser: Access = ({ req: { user } }) => {
   if (user) {

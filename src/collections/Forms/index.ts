@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload/types'
 
-import { admins } from '../access/admins'
-import { anyone } from '../access/anyone'
+import { admins } from '../../access/admins'
+import { anyone } from '../../access/anyone'
 import { BooleanBlock } from './blocks/BooleanBlock'
 import { IntegerBlock } from './blocks/IntegerBlock'
 import { NumberBlock } from './blocks/NumberBlock'
