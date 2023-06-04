@@ -58,13 +58,13 @@ export default buildConfig({
     : {}),
   plugins: [
     nestedDocs({
-      collections: ['pages', 'posts', 'categories'],
+      collections: ['pages'],
     }),
     redirects({
-      collections: ['pages', 'posts'],
+      collections: ['pages'],
     }),
     seo({
-      collections: ['pages', 'posts'],
+      collections: ['pages'],
       generateTitle,
       uploadsCollection: 'media',
     }),

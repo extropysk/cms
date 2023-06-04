@@ -3,8 +3,6 @@ import type { Payload } from 'payload'
 
 import { courseImage } from './course'
 import { home } from './home'
-import { post1 } from './post-1'
-import { post2 } from './post-2'
 import { posts } from './posts-page'
 import { shirtImage } from './shirt-image'
 
@@ -48,18 +46,6 @@ export const seed = async (payload: Payload): Promise<void> => {
   const { id: homePageID } = await payload.create({
     collection: 'pages',
     data: homePageJSON,
-  })
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { id: postOneID } = await payload.create({
-    collection: 'posts',
-    data: JSON.parse(JSON.stringify(post1)),
-  })
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { id: postTwoID } = await payload.create({
-    collection: 'posts',
-    data: JSON.parse(JSON.stringify(post2)),
   })
 
   await payload.updateGlobal({

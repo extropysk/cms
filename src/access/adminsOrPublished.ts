@@ -8,8 +8,15 @@ export const adminsOrPublished: Access = ({ req: { user } }) => {
   }
 
   return {
-    _status: {
-      equals: 'published',
-    },
+    and: [
+      {
+        publishDate: {
+          less_than: new Date().toJSON(),
+        },
+        _status: {
+          not_equals: 'drafts',
+        },
+      },
+    ],
   }
 }

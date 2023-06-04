@@ -7,28 +7,14 @@ import { CallToAction } from '../../blocks/CallToAction'
 import { Content } from '../../blocks/Content'
 import { FormBlock } from '../../blocks/Form'
 import { MediaBlock } from '../../blocks/Media'
-import { hero } from '../../fields/hero'
-import { slugField } from '../../fields/slug'
-import { populateArchiveBlock } from '../../hooks/populateArchiveBlock'
-import { populatePublishedDate } from '../../hooks/populatePublishedDate'
-import { formatAppURL, revalidatePage } from '../../hooks/revalidatePage'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'updatedAt'],
-    preview: doc =>
-      `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL({ doc })}`,
+    defaultColumns: ['title', 'updatedAt'],
   },
-  hooks: {
-    beforeChange: [populatePublishedDate],
-    afterRead: [populateArchiveBlock],
-    afterChange: [revalidatePage],
-  },
-  versions: {
-    drafts: true,
-  },
+  versions: true,
   access: {
     read: adminsOrPublished,
     update: admins,
@@ -42,32 +28,40 @@ export const Posts: CollectionConfig = {
       required: true,
     },
     {
-      name: 'publishedDate',
-      type: 'date',
+      name: 'category',
+      type: 'relationship',
+      relationTo: 'categories',
+      // limit the options using the below query which uses the "archive" field set in the categories collection
+      filterOptions: {
+        archived: { equals: false },
+      },
+      // allow selection of one or more categories
+      hasMany: true,
+    },
+    {
+      name: 'layout',
+      type: 'blocks',
+      minRows: 1,
+      blocks: [CallToAction, Content, FormBlock, MediaBlock, Archive],
+    },
+    {
+      name: 'author',
+      type: 'relationship',
+      relationTo: 'users',
+      // defaultValues can use functions to return data to populate the create form and also when making POST requests the server will use the value or function to fill in any undefined fields before validation occurs
+      defaultValue: ({ user }) => user.id,
       admin: {
         position: 'sidebar',
       },
     },
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'Hero',
-          fields: [hero],
-        },
-        {
-          label: 'Content',
-          fields: [
-            {
-              name: 'layout',
-              type: 'blocks',
-              required: true,
-              blocks: [CallToAction, Content, FormBlock, MediaBlock, Archive],
-            },
-          ],
-        },
-      ],
+      name: 'publishDate',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        description: 'Posts will not be public until this date',
+      },
+      defaultValue: () => new Date(),
     },
-    slugField(),
   ],
 }
