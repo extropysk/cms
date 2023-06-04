@@ -21,21 +21,17 @@ const toSchema = ({ fields }: Form): { required: string[]; properties: object } 
 }
 
 export const getSchema = async (id: string): Promise<object> => {
-  try {
-    const res = await payload.findByID({
-      collection: 'forms',
-      id,
-    })
+  const res = await payload.findByID({
+    collection: 'forms',
+    id,
+  })
 
-    const { properties, required } = toSchema(res)
-    return {
-      title: res.title,
-      description: res.description,
-      type: res.type,
-      properties,
-      required,
-    }
-  } catch (error: unknown) {
-    return null
+  const { properties, required } = toSchema(res)
+  return {
+    title: res.title,
+    description: res.description,
+    type: res.type,
+    properties,
+    required,
   }
 }

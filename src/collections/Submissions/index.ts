@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload/types'
 
 import { adminsOrCreatedBy } from '../../access/adminsOrCreatedBy'
 import { populateCreatedBy } from '../../hooks/populateCreatedBy'
+import { validateData } from './hooks/validateData'
 
 export const Submissions: CollectionConfig = {
   slug: 'submissions',
@@ -15,7 +16,7 @@ export const Submissions: CollectionConfig = {
     delete: adminsOrCreatedBy,
   },
   hooks: {
-    beforeChange: [populateCreatedBy],
+    beforeChange: [populateCreatedBy, validateData],
   },
   fields: [
     {
