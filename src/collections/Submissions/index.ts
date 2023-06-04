@@ -7,6 +7,7 @@ export const Submissions: CollectionConfig = {
   slug: 'submissions',
   admin: {
     defaultColumns: ['createdBy', 'form'],
+    group: 'Forms',
   },
   access: {
     read: adminsOrCreatedBy,

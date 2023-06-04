@@ -12,6 +12,7 @@ export const Forms: CollectionConfig = {
   slug: 'forms',
   admin: {
     useAsTitle: 'title',
+    group: 'Forms',
   },
   access: {
     create: admins,
