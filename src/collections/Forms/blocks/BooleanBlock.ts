@@ -1,8 +1,18 @@
 import type { Block } from 'payload/types'
 
-import { BaseBlock } from './BaseBlock'
+import { title } from '../fields/title'
 
 export const BooleanBlock: Block = {
   slug: 'boolean-type',
-  fields: BaseBlock.fields,
+  fields: [
+    title,
+    {
+      name: 'description',
+      type: 'text',
+    },
+    {
+      name: 'required',
+      type: 'checkbox',
+    },
+  ],
 }

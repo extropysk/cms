@@ -14,6 +14,12 @@ const toSchema = ({ fields }: Form): { required: string[]; properties: object } 
       description: field.description,
       default: field.default,
       type: field.blockType.split(/[-_]+/).shift(),
+      format: field.format,
+      minimum: field.minimum,
+      maximum: field.maximum,
+      minLength: field.minLength,
+      maxLength: field.maxLength,
+      oneOf: field.oneOf,
     }
   })
 
@@ -30,7 +36,7 @@ export const getSchema = async (id: string): Promise<object> => {
   return {
     title: res.title,
     description: res.description,
-    type: res.type,
+    type: 'object',
     properties,
     required,
   }

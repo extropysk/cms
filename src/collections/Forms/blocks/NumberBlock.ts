@@ -1,8 +1,31 @@
 import type { Block } from 'payload/types'
 
-import { BaseBlock } from './BaseBlock'
+import { title } from '../fields/title'
 
 export const NumberBlock: Block = {
   slug: 'number-type',
-  fields: BaseBlock.fields,
+  fields: [
+    title,
+    {
+      name: 'description',
+      type: 'text',
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'minimum',
+          type: 'number',
+        },
+        {
+          name: 'maximum',
+          type: 'number',
+        },
+      ],
+    },
+    {
+      name: 'required',
+      type: 'checkbox',
+    },
+  ],
 }

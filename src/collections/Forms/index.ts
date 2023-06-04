@@ -31,14 +31,6 @@ export const Forms: CollectionConfig = {
       type: 'text',
     },
     {
-      name: 'type',
-      type: 'text',
-      defaultValue: 'object',
-      admin: {
-        hidden: true,
-      },
-    },
-    {
       name: 'fields',
       type: 'blocks',
       required: true,
@@ -51,11 +43,7 @@ export const Forms: CollectionConfig = {
       method: 'get',
       handler: async (req, res) => {
         const result = await getSchema(req.params.id)
-        if (result) {
-          res.status(200).send(result)
-        } else {
-          res.status(404).send({ error: 'NotFound' })
-        }
+        res.status(200).send(result)
       },
     },
   ],
