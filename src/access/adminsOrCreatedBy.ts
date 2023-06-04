@@ -2,14 +2,18 @@ import type { Access } from 'payload/config'
 
 import { checkRole } from '../collections/Users/checkRole'
 
-export const adminsOrPublished: Access = ({ req: { user } }) => {
+export const adminsOrCreatedBy: Access = ({ req: { user } }) => {
   if (user && checkRole(['admin'], user)) {
     return true
   }
 
-  return {
-    publishDate: {
-      less_than: new Date().toJSON(),
-    },
+  if (user) {
+    return {
+      createdBy: {
+        equals: user.id,
+      },
+    }
   }
+
+  return false
 }

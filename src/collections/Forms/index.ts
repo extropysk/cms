@@ -40,6 +40,7 @@ export const Forms: CollectionConfig = {
     {
       name: 'fields',
       type: 'blocks',
+      required: true,
       blocks: [StringBlock, NumberBlock, IntegerBlock, BooleanBlock],
     },
   ],

@@ -45,16 +45,6 @@ export const Posts: CollectionConfig = {
       blocks: [CallToAction, Content, FormBlock, MediaBlock, Archive],
     },
     {
-      name: 'author',
-      type: 'relationship',
-      relationTo: 'users',
-      // defaultValues can use functions to return data to populate the create form and also when making POST requests the server will use the value or function to fill in any undefined fields before validation occurs
-      defaultValue: ({ user }) => user.id,
-      admin: {
-        position: 'sidebar',
-      },
-    },
-    {
       name: 'publishDate',
       type: 'date',
       admin: {

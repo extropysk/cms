@@ -11,6 +11,7 @@ import { Forms } from './collections/Forms'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Submissions } from './collections/Submissions'
 import Users from './collections/Users'
 import BeforeDashboard from './components/BeforeDashboard'
 import { Footer } from './globals/Footer'
@@ -42,7 +43,7 @@ export default buildConfig({
     }),
   },
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  collections: [Users, Categories, Pages, Posts, Media, Forms],
+  collections: [Users, Categories, Pages, Posts, Media, Forms, Submissions],
   globals: [Header, Footer],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
