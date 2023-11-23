@@ -1546,6 +1546,21 @@
     nodemailer "^6.9.1"
     resend "^0.17.2"
 
+"@payloadcms/plugin-nested-docs@^1.0.8":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-nested-docs/-/plugin-nested-docs-1.0.9.tgz#c74be3043bfabbfd8da20f0b104f48037e832e47"
+  integrity sha512-XfjKJc9xDCSn+mRpV1cOwkqwiyWaegzerjm9HUuE0xZ/JOhOxVprOmAo/+xK+TSdXkhDunJdy9V/HSGtdcHDvg==
+
+"@payloadcms/plugin-redirects@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-redirects/-/plugin-redirects-1.0.1.tgz#6660d21b11aa81e55931bd2f346e6b9fc95f0b61"
+  integrity sha512-07EbEm6x7s8Nnzi0U+5/7wbqMdZHIGZh4AxKPAILtY/ohqbQ+vxJa4S0f5Xe7hRvc9hLm4Kp9zrC6zvbRvUvSA==
+
+"@payloadcms/plugin-seo@^1.0.10":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-1.0.15.tgz#ca794897d1e8c3291a8dd74339b7f28f10bba815"
+  integrity sha512-7nU0DD3UZOOHsV2UIkOWL2JNCX+u1WNbEvZOiGpO6lB6YekuVIMqxHKbTdVR73UeW44lApvS9LTgif3XLQ5HDA==
+
 "@payloadcms/richtext-slate@^1.0.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/richtext-slate/-/richtext-slate-1.2.0.tgz#c8569fb2ee6dbe513ecb739907cc0ac283771516"
