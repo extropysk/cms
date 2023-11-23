@@ -1,34 +1,35 @@
-import express from "express";
-import payload from "payload";
-import { seed } from "./seed";
+import dotenv from 'dotenv'
+import express from 'express'
+import payload from 'payload'
+import { seed } from './seed'
 
-require("dotenv").config();
-const app = express();
-const PORT = process.env.PORT || 3000;
+dotenv.config()
+const app = express()
+const PORT = process.env.PORT || 3000
 
 // Redirect root to Admin panel
-app.get("/", (_, res) => {
-  res.redirect("/admin");
-});
+app.get('/', (_, res) => {
+  res.redirect('/admin')
+})
 
-const start = async () => {
+const start = async (): Promise<void> => {
   // Initialize Payload
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
     express: app,
     onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
     },
-  });
+  })
 
-  if (process.env.PAYLOAD_SEED === "true") {
-    await seed(payload);
-    process.exit();
+  if (process.env.PAYLOAD_SEED === 'true') {
+    await seed(payload)
+    process.exit()
   }
 
   app.listen(PORT, async () => {
-    payload.logger.info(`App URL: ${process.env.PAYLOAD_PUBLIC_SERVER_URL}`);
-  });
-};
+    payload.logger.info(`App URL: ${process.env.PAYLOAD_PUBLIC_SERVER_URL}`)
+  })
+}
 
-start();
+start()
