@@ -1597,10 +1597,10 @@
     webpack-dev-middleware "6.0.1"
     webpack-hot-middleware "^2.25.3"
 
-"@payloadcms/db-postgres@^0.x":
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/@payloadcms/db-postgres/-/db-postgres-0.1.13.tgz#091cc521604f7429639d57784eedf43651b8efc2"
-  integrity sha512-VqIiGRld2Qr8Pto/R/+HW+FusXyr/8DK22R5rOVuC1XDh5b4TETMB9gEgPunIcwrTaPHiWI70zh3eh2WD4JQFw==
+"@payloadcms/db-postgres@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/db-postgres/-/db-postgres-0.2.0.tgz#f786ad665334291b1b903119ef1883e2c3ddeed5"
+  integrity sha512-arHknxedQTTRegK/A6m9eFlSSFK12uOAFQkajNMKQ4jkPy5Hf+eR8YROeA16HRgfbCXl+YoH7QpQD4HYLmYshQ==
   dependencies:
     "@libsql/client" "^0.3.1"
     console-table-printer "2.11.2"
@@ -1609,6 +1609,7 @@
     pg "8.11.3"
     prompts "2.4.2"
     to-snake-case "1.0.0"
+    uuid "9.0.0"
 
 "@payloadcms/eslint-config@^0.0.1":
   version "0.0.1"
@@ -9100,6 +9101,11 @@ utils-merge@1.0.1, utils-merge@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
+
+uuid@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
 uuid@9.0.1:
   version "9.0.1"
