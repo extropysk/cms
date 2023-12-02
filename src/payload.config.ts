@@ -21,7 +21,7 @@ import { Header } from './globals/Header'
 import { Settings } from './globals/Settings'
 
 const generateTitle: GenerateTitle = () => {
-  return 'My Website'
+  return 'CMS'
 }
 
 dotenv.config()
@@ -65,13 +65,13 @@ export default buildConfig({
   endpoints: [],
   plugins: [
     redirects({
-      collections: ['pages', 'posts'],
+      collections: ['pages'],
     }),
     nestedDocs({
       collections: ['categories'],
     }),
     seo({
-      collections: ['pages', 'posts'],
+      collections: ['pages'],
       generateTitle,
       uploadsCollection: 'media',
     }),

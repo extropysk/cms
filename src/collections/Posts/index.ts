@@ -2,10 +2,6 @@ import type { CollectionConfig } from 'payload/types'
 
 import { admins } from '../../access/admins'
 import { adminsOrPublished } from '../../access/adminsOrPublished'
-import { CallToAction } from '../../blocks/CallToAction'
-import { Content } from '../../blocks/Content'
-import { MediaBlock } from '../../blocks/MediaBlock'
-import { hero } from '../../fields/hero'
 import { slugField } from '../../fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { populateAuthors } from './hooks/populateAuthors'
@@ -93,50 +89,8 @@ export const Posts: CollectionConfig = {
       ],
     },
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'Hero',
-          fields: [hero],
-        },
-        {
-          label: 'Content',
-          fields: [
-            {
-              name: 'layout',
-              type: 'blocks',
-              required: true,
-              blocks: [CallToAction, Content, MediaBlock],
-            },
-            {
-              name: 'enablePremiumContent',
-              label: 'Enable Premium Content',
-              type: 'checkbox',
-            },
-            {
-              name: 'premiumContent',
-              type: 'blocks',
-              access: {
-                read: ({ req }) => req.user,
-              },
-              blocks: [CallToAction, Content, MediaBlock],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'relatedPosts',
-      type: 'relationship',
-      relationTo: 'posts',
-      hasMany: true,
-      filterOptions: ({ id }) => {
-        return {
-          id: {
-            not_in: [id],
-          },
-        }
-      },
+      name: 'content',
+      type: 'richText',
     },
     slugField(),
   ],
