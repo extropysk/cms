@@ -1,5 +1,4 @@
 import type { Access } from 'payload/config'
-
 import { checkRole } from '../collections/Users/checkRole'
 
 export const adminsOrPublished: Access = ({ req: { user } }) => {
@@ -8,8 +7,8 @@ export const adminsOrPublished: Access = ({ req: { user } }) => {
   }
 
   return {
-    _status: {
-      equals: 'published',
+    publishedAt: {
+      less_than: new Date(),
     },
   }
 }

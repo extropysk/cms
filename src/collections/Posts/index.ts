@@ -9,27 +9,18 @@ import { hero } from '../../fields/hero'
 import { slugField } from '../../fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { populateAuthors } from './hooks/populateAuthors'
-import { revalidatePost } from './hooks/revalidatePost'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    preview: doc => {
-      return `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/api/preview?url=${encodeURIComponent(
-        `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/posts/${doc?.slug}`,
-      )}&secret=${process.env.PAYLOAD_PUBLIC_DRAFT_SECRET}`
-    },
   },
   hooks: {
     beforeChange: [populatePublishedAt],
-    afterChange: [revalidatePost],
     afterRead: [populateAuthors],
   },
-  versions: {
-    drafts: true,
-  },
+  versions: true,
   access: {
     read: adminsOrPublished,
     update: admins,
@@ -62,11 +53,8 @@ export const Posts: CollectionConfig = {
       },
       hooks: {
         beforeChange: [
-          ({ siblingData, value }) => {
-            if (siblingData._status === 'published' && !value) {
-              return new Date()
-            }
-            return value
+          ({ value }) => {
+            return value ?? new Date()
           },
         ],
       },
