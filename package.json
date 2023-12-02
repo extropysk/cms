@@ -18,7 +18,9 @@
     "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload"
   },
   "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
     "@payloadcms/bundler-webpack": "^1.0.0",
+    "@payloadcms/db-postgres": "^0.2.0",
     "@payloadcms/plugin-cloud": "^2.0.0",
     "@payloadcms/plugin-nested-docs": "^1.0.8",
     "@payloadcms/plugin-redirects": "^1.0.0",
@@ -27,8 +29,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "payload": "^2.0.0",
-    "@payloadcms/db-postgres": "^0.2.0"
+    "payload": "^2.0.0"
   },
   "devDependencies": {
     "@payloadcms/eslint-config": "^0.0.1",

@@ -52,9 +52,6 @@ const Comments: CollectionConfig = {
     // Only admins can delete comments
     delete: ({ req: { user } }) => checkRole(['admin'], user),
   },
-  versions: {
-    drafts: true,
-  },
   fields: [
     {
       name: 'user',

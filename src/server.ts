@@ -1,7 +1,6 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import payload from 'payload'
-import { seed } from './seed'
 
 dotenv.config()
 const app = express()
@@ -21,11 +20,6 @@ const start = async (): Promise<void> => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
     },
   })
-
-  if (process.env.PAYLOAD_SEED === 'true') {
-    await seed(payload)
-    process.exit()
-  }
 
   app.listen(PORT, async () => {
     payload.logger.info(`App URL: ${process.env.PAYLOAD_PUBLIC_SERVER_URL}`)
