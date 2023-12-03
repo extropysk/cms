@@ -1,19 +1,18 @@
 version: '3'
 
 services:
-  payload:
-    image: node:18-alpine
+  cms:
+    image: cms
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     ports:
-      - '3000:3000'
-    volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
-    working_dir: /home/node/app/
-    command: sh -c "yarn install && yarn dev"
-    depends_on:
-      - postgres
+      - 3000:3000
     env_file:
       - .env
+    restart: unless-stopped
+    networks:
+      - default
 
   postgres:
     image: postgres:latest
@@ -21,8 +20,11 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: pass
+      POSTGRES_DB: cms
     ports:
       - '5432:5432'
+    networks:
+      - default
 
 volumes:
   postgres:
