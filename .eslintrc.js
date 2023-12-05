@@ -5,11 +5,11 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     'simple-import-sort/imports': 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
-  'prettier/prettier': [
-    'error',
-    {
-      endOfLine: 'auto',
-    },
-  ],
 }
