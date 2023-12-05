@@ -6,4 +6,10 @@ module.exports = {
   rules: {
     'simple-import-sort/imports': 'off',
   },
+  'prettier/prettier': [
+    'error',
+    {
+      endOfLine: 'auto',
+    },
+  ],
 }
