@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload/types'
 
 import { admins } from '../../access/admins'
 import { anyone } from '../../access/anyone'
-import { populateId } from '../../hooks/populateId'
 import adminsAndUser from './access/adminsAndUser'
 import { checkRole } from './checkRole'
 import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
@@ -26,14 +25,6 @@ const Users: CollectionConfig = {
   },
   auth: true,
   fields: [
-    {
-      name: 'id',
-      type: 'text',
-      admin: { hidden: true },
-      hooks: {
-        beforeChange: [populateId],
-      },
-    },
     {
       name: 'name',
       type: 'text',

@@ -1,5 +1,4 @@
 import { webpackBundler } from '@payloadcms/bundler-webpack'
-import { postgresAdapter } from '@payloadcms/db-postgres'
 import { payloadCloud } from '@payloadcms/plugin-cloud'
 import nestedDocs from '@payloadcms/plugin-nested-docs'
 import redirects from '@payloadcms/plugin-redirects'
@@ -9,6 +8,7 @@ import { slateEditor } from '@payloadcms/richtext-slate'
 import path from 'path'
 import { buildConfig } from 'payload/config'
 
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import dotenv from 'dotenv'
 import Categories from './collections/Categories'
 import { Media } from './collections/Media'
@@ -46,10 +46,8 @@ export default buildConfig({
     }),
   },
   editor: slateEditor({}),
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI,
-    },
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URL,
   }),
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
   collections: [Pages, Posts, Media, Categories, Users],
