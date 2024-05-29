@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload/types";
+import { anyone } from "../../access/anyone";
 
 export const Tags: CollectionConfig = {
   slug: "tags",
@@ -6,7 +7,7 @@ export const Tags: CollectionConfig = {
     useAsTitle: "title",
   },
   access: {
-    read: () => true,
+    read: anyone,
   },
   fields: [
     {

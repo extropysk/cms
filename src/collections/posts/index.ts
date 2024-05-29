@@ -1,8 +1,7 @@
 import type { CollectionConfig } from "payload/types";
-import { admins } from "../../access/admins";
 import richText from "../../fields/richText";
 import { slugField } from "../../fields/slug";
-import { adminsOrPublished } from "./access/adminsOrPublished";
+import { authOrPublished } from "./access/authOrPublished";
 import { populateAuthors } from "./hooks/populateAuthor";
 import { populatePublishedAt } from "./hooks/populatePublishedAt";
 
@@ -17,10 +16,7 @@ export const Posts: CollectionConfig = {
   },
   versions: true,
   access: {
-    read: adminsOrPublished,
-    update: admins,
-    create: admins,
-    delete: admins,
+    read: authOrPublished,
   },
   fields: [
     {

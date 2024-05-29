@@ -1,6 +1,7 @@
 import { LinkFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
 import type { CollectionConfig } from "payload/types";
+import { anyone } from "../../access/anyone";
 
 export const Media: CollectionConfig = {
   slug: "media",
@@ -8,7 +9,7 @@ export const Media: CollectionConfig = {
     staticDir: path.resolve(__dirname, "../../../media"),
   },
   access: {
-    read: () => true,
+    read: anyone,
   },
   fields: [
     {
