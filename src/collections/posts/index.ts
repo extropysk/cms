@@ -28,7 +28,11 @@ export const Posts: CollectionConfig = {
       type: "text",
       required: true,
     },
-    richText(),
+    {
+      name: "summary",
+      type: "textarea",
+    },
+    richText({ name: "content" }),
     {
       name: "tags",
       type: "relationship",

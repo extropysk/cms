@@ -84,7 +84,6 @@ const richText: RichText = (
           }),
         ],
       }),
-      required: true,
       type: "richText",
     },
     overrides || {}
