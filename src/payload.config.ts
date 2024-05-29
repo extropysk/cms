@@ -2,9 +2,9 @@ import path from "path";
 
 import { webpackBundler } from "@payloadcms/bundler-webpack";
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { payloadCloud } from "@payloadcms/plugin-cloud";
-import { slateEditor } from "@payloadcms/richtext-slate";
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload/config";
+import { Posts } from "./collections/posts";
 import { Tags } from "./collections/tags";
 import { Users } from "./collections/users";
 
@@ -13,15 +13,14 @@ export default buildConfig({
     user: Users.slug,
     bundler: webpackBundler(),
   },
-  editor: slateEditor({}),
-  collections: [Users, Tags],
+  editor: lexicalEditor({}),
+  collections: [Users, Tags, Posts],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
   },
-  plugins: [payloadCloud()],
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),
