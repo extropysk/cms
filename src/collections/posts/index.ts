@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload/types";
 import { admins } from "../../access/admins";
+import richText from "../../fields/richText";
 import { slugField } from "../../fields/slug";
 import { adminsOrPublished } from "./access/adminsOrPublished";
 import { populateAuthors } from "./hooks/populateAuthor";
@@ -27,6 +28,7 @@ export const Posts: CollectionConfig = {
       type: "text",
       required: true,
     },
+    richText(),
     {
       name: "tags",
       type: "relationship",
