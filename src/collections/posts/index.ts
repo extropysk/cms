@@ -8,6 +8,7 @@ import { populatePublishedAt } from "./hooks/populatePublishedAt";
 export const Posts: CollectionConfig = {
   slug: "posts",
   admin: {
+    group: "Blog",
     useAsTitle: "title",
     defaultColumns: ["title", "slug", "updatedAt"],
   },

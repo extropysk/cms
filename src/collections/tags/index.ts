@@ -4,6 +4,7 @@ import { anyone } from "../../access/anyone";
 export const Tags: CollectionConfig = {
   slug: "tags",
   admin: {
+    group: "Blog",
     useAsTitle: "title",
   },
   access: {
