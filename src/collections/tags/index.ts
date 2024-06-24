@@ -5,15 +5,16 @@ export const Tags: CollectionConfig = {
   slug: "tags",
   admin: {
     group: "Blog",
-    useAsTitle: "title",
+    useAsTitle: "name",
   },
   access: {
     read: anyone,
   },
   fields: [
     {
-      name: "title",
+      name: "name",
       type: "text",
+      required: true,
     },
   ],
 };
