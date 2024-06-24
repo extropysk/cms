@@ -7,6 +7,7 @@ import { GenerateTitle } from "@payloadcms/plugin-seo/dist/types";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload/config";
 import { Media } from "./collections/media";
+import { Options } from "./collections/options";
 import { Posts } from "./collections/posts";
 import { Tags } from "./collections/tags";
 import { Users } from "./collections/users";
@@ -21,7 +22,7 @@ export default buildConfig({
     bundler: webpackBundler(),
   },
   editor: lexicalEditor({}),
-  collections: [Posts, Tags, Media, Users],
+  collections: [Posts, Tags, Media, Users, Options],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
