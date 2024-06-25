@@ -1,6 +1,7 @@
 import { RowLabelArgs } from "payload/dist/admin/components/forms/RowLabel/types";
 import type { CollectionConfig } from "payload/types";
 import { anyone } from "../../../access/anyone";
+import { customSelectField } from "../../../fields/select";
 
 export const Products: CollectionConfig = {
   slug: "products",
@@ -19,7 +20,7 @@ export const Products: CollectionConfig = {
       hasMany: true,
     },
     {
-      name: "variant",
+      name: "variants",
       type: "array",
       fields: [
         {
@@ -40,11 +41,7 @@ export const Products: CollectionConfig = {
                   relationTo: "options",
                   required: true,
                 },
-                {
-                  name: "value",
-                  type: "text",
-                  required: true,
-                },
+                customSelectField(),
               ],
             },
           ],
