@@ -3,6 +3,7 @@ import type { CollectionConfig } from "payload/types";
 import { anyone } from "../../../access/anyone";
 import { optionSelectField } from "../../../fields/optionSelect";
 import { priceField } from "../../../fields/price";
+import { validateUnique } from "../../../utilities/validate";
 
 export const Products: CollectionConfig = {
   slug: "products",
@@ -39,6 +40,7 @@ export const Products: CollectionConfig = {
         {
           name: "selectedOptions",
           type: "array",
+          validate: validateUnique("operation"),
           fields: [
             {
               type: "row",
