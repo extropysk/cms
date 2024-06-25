@@ -33,6 +33,7 @@ export const Options: CollectionConfig = {
             {
               type: "text",
               name: "label",
+              required: true,
             },
           ],
         },

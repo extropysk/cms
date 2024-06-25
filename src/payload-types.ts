@@ -131,7 +131,7 @@ export interface Option {
   name: string;
   values: {
     value: string;
-    label?: string | null;
+    label: string;
     id?: string | null;
   }[];
   updatedAt: string;
@@ -143,19 +143,18 @@ export interface Option {
  */
 export interface Product {
   id: string;
-  options?:
-    | {
-        relationTo: 'options';
-        value: string | Option;
-      }[]
-    | null;
+  price: {
+    amount: number;
+    currencyCode: 'eur';
+  };
   variants?:
     | {
         title: string;
+        disabled?: boolean | null;
         selectedOptions?:
           | {
               option: string | Option;
-              customSelectField?: string | null;
+              value: string;
               id?: string | null;
             }[]
           | null;

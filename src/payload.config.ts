@@ -25,6 +25,7 @@ export default buildConfig({
     components: {
       providers: [QueryProvider],
     },
+    css: path.resolve(__dirname, "styles/global.scss"),
   },
   editor: lexicalEditor({}),
   collections: [Posts, Tags, Media, Users, Options, Products],

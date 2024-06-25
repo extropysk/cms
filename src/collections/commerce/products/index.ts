@@ -30,6 +30,9 @@ export const Products: CollectionConfig = {
             {
               name: "disabled",
               type: "checkbox",
+              admin: {
+                className: "field-flex-end",
+              },
             },
           ],
         },

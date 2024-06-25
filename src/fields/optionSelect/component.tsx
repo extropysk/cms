@@ -31,10 +31,7 @@ export const OptionSelectComponent: React.FC<Props> = ({
       path={path}
       name={path}
       required={required}
-      options={(data?.values ?? []).map(({ label, value }) => ({
-        label: label ?? value,
-        value,
-      }))}
+      options={data?.values ?? []}
       value={value}
       onChange={(e) => setValue(e?.value)}
     />

@@ -3,9 +3,9 @@ import React from "react";
 
 const queryClient = new QueryClient();
 
-interface Props {
+type Props = {
   children: React.ReactNode;
-}
+};
 
 export const QueryProvider = ({ children }: Props) => {
   return (
