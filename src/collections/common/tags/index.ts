@@ -1,10 +1,9 @@
 import type { CollectionConfig } from "payload/types";
-import { anyone } from "../../access/anyone";
+import { anyone } from "../../../access/anyone";
 
 export const Tags: CollectionConfig = {
   slug: "tags",
   admin: {
-    group: "Blog",
     useAsTitle: "name",
   },
   access: {

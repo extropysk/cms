@@ -6,11 +6,11 @@ import seo from "@payloadcms/plugin-seo";
 import { GenerateTitle } from "@payloadcms/plugin-seo/dist/types";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload/config";
-import { Media } from "./collections/media";
-import { Options } from "./collections/options";
-import { Posts } from "./collections/posts";
-import { Tags } from "./collections/tags";
-import { Users } from "./collections/users";
+import { Posts } from "./collections/blog/posts";
+import { Options } from "./collections/commerce/options";
+import { Media } from "./collections/common/media";
+import { Tags } from "./collections/common/tags";
+import { Users } from "./collections/common/users";
 
 const generateTitle: GenerateTitle = () => {
   return "My Store";

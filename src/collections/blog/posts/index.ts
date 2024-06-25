@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload/types";
-import richText from "../../fields/richText";
-import { slugField } from "../../fields/slug";
+import richText from "../../../fields/richText";
+import { slugField } from "../../../fields/slug";
 import { authOrPublished } from "./access/authOrPublished";
 import { populateAuthors } from "./hooks/populateAuthor";
 import { populatePublishedAt } from "./hooks/populatePublishedAt";

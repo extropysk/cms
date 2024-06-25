@@ -1,7 +1,7 @@
 import type { CollectionConfig } from "payload/types";
-import { admins } from "../../access/admins";
-import { adminsAndUser } from "../../access/adminsAndUser";
-import { checkRole } from "../../access/checkRole";
+import { admins } from "../../../access/admins";
+import { adminsAndUser } from "../../../access/adminsAndUser";
+import { checkRole } from "../../../access/checkRole";
 import { ensureFirstUserIsAdmin } from "./hooks/ensureFirstUserIsAdmin";
 import { loginAfterCreate } from "./hooks/loginAfterCreate";
 
