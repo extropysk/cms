@@ -129,7 +129,11 @@ export interface Media {
 export interface Option {
   id: string;
   name: string;
-  values: string[];
+  values: {
+    value: string;
+    label?: string | null;
+    id?: string | null;
+  }[];
   updatedAt: string;
   createdAt: string;
 }

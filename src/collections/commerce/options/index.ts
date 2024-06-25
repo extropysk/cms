@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload/types";
+import { anyone } from "../../../access/anyone";
 
 export const Options: CollectionConfig = {
   slug: "options",
@@ -7,7 +8,7 @@ export const Options: CollectionConfig = {
     useAsTitle: "name",
   },
   access: {
-    // read: anyone,
+    read: anyone,
   },
   fields: [
     {
@@ -15,11 +16,27 @@ export const Options: CollectionConfig = {
       type: "text",
       required: true,
     },
+
     {
       name: "values",
-      type: "text",
-      hasMany: true,
+      type: "array",
       required: true,
+      fields: [
+        {
+          type: "row",
+          fields: [
+            {
+              type: "text",
+              name: "value",
+              required: true,
+            },
+            {
+              type: "text",
+              name: "label",
+            },
+          ],
+        },
+      ],
     },
   ],
 };
