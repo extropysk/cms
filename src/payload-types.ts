@@ -12,6 +12,8 @@ export interface Config {
     tags: Tag;
     media: Media;
     users: User;
+    options: Option;
+    products: Product;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -64,7 +66,7 @@ export interface Post {
  */
 export interface Tag {
   id: string;
-  title?: string | null;
+  name: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -119,6 +121,45 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "options".
+ */
+export interface Option {
+  id: string;
+  name: string;
+  values: string[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: string;
+  options?:
+    | {
+        relationTo: 'options';
+        value: string | Option;
+      }[]
+    | null;
+  variants?:
+    | {
+        title: string;
+        selectedOptions?:
+          | {
+              option: string | Option;
+              customSelectField?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

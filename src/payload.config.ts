@@ -12,6 +12,7 @@ import { Products } from "./collections/commerce/products";
 import { Media } from "./collections/common/media";
 import { Tags } from "./collections/common/tags";
 import { Users } from "./collections/common/users";
+import { QueryProvider } from "./components/queryProvider";
 
 const generateTitle: GenerateTitle = () => {
   return "My Store";
@@ -21,6 +22,9 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    components: {
+      providers: [QueryProvider],
+    },
   },
   editor: lexicalEditor({}),
   collections: [Posts, Tags, Media, Users, Options, Products],
