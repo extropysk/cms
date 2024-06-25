@@ -2,6 +2,7 @@ import { RowLabelArgs } from "payload/dist/admin/components/forms/RowLabel/types
 import type { CollectionConfig } from "payload/types";
 import { anyone } from "../../../access/anyone";
 import { optionSelectField } from "../../../fields/optionSelect";
+import { priceField } from "../../../fields/price";
 
 export const Products: CollectionConfig = {
   slug: "products",
@@ -13,14 +14,24 @@ export const Products: CollectionConfig = {
     read: anyone,
   },
   fields: [
+    priceField({ required: true }),
     {
       name: "variants",
       type: "array",
       fields: [
         {
-          name: "title",
-          type: "text",
-          required: true,
+          type: "row",
+          fields: [
+            {
+              name: "title",
+              type: "text",
+              required: true,
+            },
+            {
+              name: "disabled",
+              type: "checkbox",
+            },
+          ],
         },
         {
           name: "selectedOptions",
