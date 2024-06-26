@@ -13,13 +13,12 @@ import { addClassNamesToElement } from '@lexical/utils'
 import {
   $applyNodeReplacement,
   $createParagraphNode,
-  type EditorConfig,
   ElementNode,
+  isHTMLElement,
   type LexicalNode,
   type NodeKey,
   type RangeSelection,
   type SerializedElementNode,
-  isHTMLElement,
 } from 'lexical'
 
 export type SerializedLabelNode = SerializedElementNode
@@ -59,15 +58,16 @@ export class LabelNode extends ElementNode {
   canInsertTextBefore(): true {
     return true
   }
+
   collapseAtStart(): true {
     const paragraph = $createParagraphNode()
     const children = this.getChildren()
-    children.forEach((child) => paragraph.append(child))
+    children.forEach(child => paragraph.append(child))
     this.replace(paragraph)
     return true
   }
 
-  createDOM(config: EditorConfig): HTMLElement {
+  createDOM(): HTMLElement {
     const element = document.createElement('span')
     addClassNamesToElement(element, 'label')
     return element
@@ -114,7 +114,7 @@ export class LabelNode extends ElementNode {
     return false
   }
 
-  updateDOM(prevNode: LabelNode, dom: HTMLElement): boolean {
+  updateDOM(): boolean {
     return false
   }
 }

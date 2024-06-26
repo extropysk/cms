@@ -12,6 +12,9 @@ export interface Config {
     tags: Tag;
     media: Media;
     users: User;
+    options: Option;
+    products: Product;
+    carts: Cart;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -64,7 +67,7 @@ export interface Post {
  */
 export interface Tag {
   id: string;
-  title?: string | null;
+  name: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -119,6 +122,65 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "options".
+ */
+export interface Option {
+  id: string;
+  name: string;
+  values: {
+    value: string;
+    label: string;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: string;
+  variants: {
+    title: string;
+    disabled?: boolean | null;
+    price: {
+      amount: number;
+      currencyCode: 'eur';
+    };
+    selectedOptions?:
+      | {
+          option: string | Option;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "carts".
+ */
+export interface Cart {
+  id: string;
+  name: string;
+  totalAmount?: number | null;
+  lines?:
+    | {
+        product?: (string | null) | Product;
+        variant: string;
+        quantity: number;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

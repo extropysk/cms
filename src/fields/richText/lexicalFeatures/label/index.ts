@@ -19,8 +19,7 @@ export const LabelFeature = (): FeatureProvider => {
         sections: [
           FormatSectionWithEntries([
             {
-              ChildComponent: () =>
-                import('./Icon').then((module) => module.LabelIcon),
+              ChildComponent: () => import('./Icon').then(module => module.LabelIcon),
               isActive: ({ selection }) => {
                 if ($isRangeSelection(selection)) {
                   const selectedNode = getSelectedNode(selection)
@@ -57,8 +56,7 @@ export const LabelFeature = (): FeatureProvider => {
           {
             options: [
               new SlashMenuOption(`Label`, {
-                Icon: () =>
-                  import('./Icon').then((module) => module.LabelIcon),
+                Icon: () => import('./Icon').then(module => module.LabelIcon),
                 keywords: ['label'],
                 onSelect: () => {
                   const selection = $getSelection()

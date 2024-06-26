@@ -1,32 +1,28 @@
-import type { FeatureProvider } from "@payloadcms/richtext-lexical";
-import type { RichTextField } from "payload/types";
+import type { FeatureProvider } from '@payloadcms/richtext-lexical'
+import type { RichTextField } from 'payload/types'
 
-import {
-  ParagraphFeature,
-  UploadFeature,
-  lexicalEditor,
-} from "@payloadcms/richtext-lexical";
+import { ParagraphFeature, UploadFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 
-import deepMerge from "../../utilities/deepMerge";
-import { link } from "../link";
-import { defaultPublicDemoFeatures } from "./defaultFeatures";
+import deepMerge from '../../utilities/deepMerge'
+import { link } from '../link'
+import { defaultPublicDemoFeatures } from './defaultFeatures'
 
 type RichText = (
   overrides?: Partial<RichTextField>,
   additions?: {
-    features?: FeatureProvider[];
-  }
-) => RichTextField;
+    features?: FeatureProvider[]
+  },
+) => RichTextField
 
 const richText: RichText = (
   overrides,
   additions = {
     features: [],
-  }
+  },
 ) =>
   deepMerge<RichTextField, Partial<RichTextField>>(
     {
-      name: "richText",
+      name: 'richText',
       editor: lexicalEditor({
         features: () => [
           ...[...defaultPublicDemoFeatures, ...(additions.features || [])],
@@ -35,39 +31,36 @@ const richText: RichText = (
               media: {
                 fields: [
                   {
-                    name: "caption",
+                    name: 'caption',
                     editor: lexicalEditor({
-                      features: () => [
-                        ParagraphFeature(),
-                        ...defaultPublicDemoFeatures,
-                      ],
+                      features: () => [ParagraphFeature(), ...defaultPublicDemoFeatures],
                     }),
-                    label: "Caption",
-                    type: "richText",
+                    label: 'Caption',
+                    type: 'richText',
                   },
                   {
-                    name: "alignment",
-                    label: "Alignment",
+                    name: 'alignment',
+                    label: 'Alignment',
                     options: [
                       {
-                        label: "Left",
-                        value: "left",
+                        label: 'Left',
+                        value: 'left',
                       },
                       {
-                        label: "Center",
-                        value: "center",
+                        label: 'Center',
+                        value: 'center',
                       },
                       {
-                        label: "Right",
-                        value: "right",
+                        label: 'Right',
+                        value: 'right',
                       },
                     ],
-                    type: "radio",
+                    type: 'radio',
                   },
                   {
-                    name: "enableLink",
-                    label: "Enable Link",
-                    type: "checkbox",
+                    name: 'enableLink',
+                    label: 'Enable Link',
+                    type: 'checkbox',
                   },
                   link({
                     appearances: false,
@@ -84,9 +77,9 @@ const richText: RichText = (
           }),
         ],
       }),
-      type: "richText",
+      type: 'richText',
     },
-    overrides || {}
-  );
+    overrides || {},
+  )
 
-export default richText;
+export default richText
