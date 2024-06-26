@@ -1,6 +1,7 @@
 import { LinkFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import type { CollectionConfig } from 'payload/types'
+import { admins } from '../../../access/admins'
 import { anyone } from '../../../access/anyone'
 
 export const Media: CollectionConfig = {
@@ -10,6 +11,9 @@ export const Media: CollectionConfig = {
   },
   access: {
     read: anyone,
+    create: admins,
+    update: admins,
+    delete: admins,
   },
   fields: [
     {

@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload/types'
+import { admins } from '../../../access/admins'
 import { anyone } from '../../../access/anyone'
 
 export const Options: CollectionConfig = {
@@ -9,6 +10,9 @@ export const Options: CollectionConfig = {
   },
   access: {
     read: anyone,
+    create: admins,
+    update: admins,
+    delete: admins,
   },
   fields: [
     {

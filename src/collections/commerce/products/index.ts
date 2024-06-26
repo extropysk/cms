@@ -1,5 +1,6 @@
 import type { RowLabelArgs } from 'payload/dist/admin/components/forms/RowLabel/types'
 import type { CollectionConfig } from 'payload/types'
+import { admins } from '../../../access/admins'
 import { anyone } from '../../../access/anyone'
 import { mediaField } from '../../../fields/media'
 import { optionSelectField } from '../../../fields/optionSelect'
@@ -15,6 +16,9 @@ export const Products: CollectionConfig = {
   },
   access: {
     read: anyone,
+    create: admins,
+    update: admins,
+    delete: admins,
   },
   fields: [
     {

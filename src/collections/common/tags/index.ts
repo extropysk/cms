@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload/types'
+import { admins } from '../../../access/admins'
 import { anyone } from '../../../access/anyone'
 
 export const Tags: CollectionConfig = {
@@ -8,6 +9,9 @@ export const Tags: CollectionConfig = {
   },
   access: {
     read: anyone,
+    create: admins,
+    update: admins,
+    delete: admins,
   },
   fields: [
     {

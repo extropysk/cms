@@ -8,6 +8,7 @@ export const Carts: CollectionConfig = {
     group: 'Shop',
     useAsTitle: 'name',
   },
+  access: {},
   fields: [
     {
       name: 'name',
@@ -48,8 +49,11 @@ export const Carts: CollectionConfig = {
               name: 'quantity',
               type: 'number',
               required: true,
-              min: 1,
               defaultValue: 1,
+              min: 1,
+              admin: {
+                step: 1,
+              },
             },
           ],
         },

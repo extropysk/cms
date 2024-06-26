@@ -19,6 +19,7 @@ export const priceField = ({ required }: Options): Field => ({
           name: 'amount',
           type: 'number',
           required,
+          min: 0,
         },
         {
           name: 'currencyCode',
