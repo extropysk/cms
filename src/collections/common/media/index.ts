@@ -6,7 +6,7 @@ import { anyone } from '../../../access/anyone'
 export const Media: CollectionConfig = {
   slug: 'media',
   upload: {
-    staticDir: path.resolve(__dirname, '../../../media'),
+    staticDir: path.resolve(__dirname, '../../../../media'),
   },
   access: {
     read: anyone,

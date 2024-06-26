@@ -1,6 +1,7 @@
 import type { RowLabelArgs } from 'payload/dist/admin/components/forms/RowLabel/types'
 import type { CollectionConfig } from 'payload/types'
 import { anyone } from '../../../access/anyone'
+import { mediaField } from '../../../fields/media'
 import { optionSelectField } from '../../../fields/optionSelect'
 import { priceField } from '../../../fields/price'
 import richText from '../../../fields/richText'
@@ -94,5 +95,6 @@ export const Products: CollectionConfig = {
         },
       },
     },
+    mediaField({}),
   ],
 }
