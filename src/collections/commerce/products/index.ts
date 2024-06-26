@@ -15,10 +15,10 @@ export const Products: CollectionConfig = {
     read: anyone,
   },
   fields: [
-    priceField({ required: true }),
     {
       name: "variants",
       type: "array",
+      required: true,
       fields: [
         {
           type: "row",
@@ -37,6 +37,7 @@ export const Products: CollectionConfig = {
             },
           ],
         },
+        priceField({ required: true }),
         {
           name: "selectedOptions",
           type: "array",
