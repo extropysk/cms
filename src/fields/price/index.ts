@@ -1,31 +1,31 @@
-import { Field } from "payload/types";
+import type { Field } from 'payload/types'
 
 enum Currency {
-  EUR = "eur",
+  EUR = 'eur',
 }
 
-type Options = {
-  required?: boolean;
-};
+interface Options {
+  required?: boolean
+}
 
 export const priceField = ({ required }: Options): Field => ({
-  name: "price",
-  type: "group",
+  name: 'price',
+  type: 'group',
   fields: [
     {
-      type: "row",
+      type: 'row',
       fields: [
         {
-          name: "amount",
-          type: "number",
+          name: 'amount',
+          type: 'number',
           required,
         },
         {
-          name: "currencyCode",
-          type: "select",
+          name: 'currencyCode',
+          type: 'select',
           required,
           defaultValue: Currency.EUR,
-          options: Object.values(Currency).map((currency) => ({
+          options: Object.values(Currency).map(currency => ({
             label: currency,
             value: currency,
           })),
@@ -33,4 +33,4 @@ export const priceField = ({ required }: Options): Field => ({
       ],
     },
   ],
-});
+})

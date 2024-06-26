@@ -14,6 +14,7 @@ export interface Config {
     users: User;
     options: Option;
     products: Product;
+    carts: Cart;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -143,21 +144,36 @@ export interface Option {
  */
 export interface Product {
   id: string;
-  price: {
-    amount: number;
-    currencyCode: 'eur';
-  };
-  variants?:
+  variants: {
+    title: string;
+    disabled?: boolean | null;
+    price: {
+      amount: number;
+      currencyCode: 'eur';
+    };
+    selectedOptions?:
+      | {
+          option: string | Option;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "carts".
+ */
+export interface Cart {
+  id: string;
+  name: string;
+  lines?:
     | {
-        title: string;
-        disabled?: boolean | null;
-        selectedOptions?:
-          | {
-              option: string | Option;
-              value: string;
-              id?: string | null;
-            }[]
-          | null;
+        product?: (string | null) | Product;
+        variant: string;
         id?: string | null;
       }[]
     | null;

@@ -1,16 +1,16 @@
-import type { CollectionConfig } from "payload/types";
-import richText from "../../../fields/richText";
-import { slugField } from "../../../fields/slug";
-import { authOrPublished } from "./access/authOrPublished";
-import { populateAuthors } from "./hooks/populateAuthor";
-import { populatePublishedAt } from "./hooks/populatePublishedAt";
+import type { CollectionConfig } from 'payload/types'
+import richText from '../../../fields/richText'
+import { slugField } from '../../../fields/slug'
+import { authOrPublished } from './access/authOrPublished'
+import { populateAuthors } from './hooks/populateAuthor'
+import { populatePublishedAt } from './hooks/populatePublishedAt'
 
 export const Posts: CollectionConfig = {
-  slug: "posts",
+  slug: 'posts',
   admin: {
-    group: "Blog",
-    useAsTitle: "title",
-    defaultColumns: ["title", "slug", "updatedAt"],
+    group: 'Blog',
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'slug', 'updatedAt'],
   },
   hooks: {
     afterRead: [populateAuthors],
@@ -21,31 +21,31 @@ export const Posts: CollectionConfig = {
   },
   fields: [
     {
-      name: "title",
-      type: "text",
+      name: 'title',
+      type: 'text',
       required: true,
     },
     {
-      name: "summary",
-      type: "textarea",
+      name: 'summary',
+      type: 'textarea',
     },
-    richText({ name: "content" }),
+    richText({ name: 'content' }),
     {
-      name: "tags",
-      type: "relationship",
-      relationTo: "tags",
+      name: 'tags',
+      type: 'relationship',
+      relationTo: 'tags',
       hasMany: true,
       admin: {
-        position: "sidebar",
+        position: 'sidebar',
       },
     },
     {
-      name: "publishedAt",
-      type: "date",
+      name: 'publishedAt',
+      type: 'date',
       admin: {
-        position: "sidebar",
+        position: 'sidebar',
         date: {
-          pickerAppearance: "dayAndTime",
+          pickerAppearance: 'dayAndTime',
         },
       },
       hooks: {
@@ -53,20 +53,20 @@ export const Posts: CollectionConfig = {
       },
     },
     {
-      name: "authors",
-      type: "relationship",
-      relationTo: "users",
+      name: 'authors',
+      type: 'relationship',
+      relationTo: 'users',
       hasMany: true,
       admin: {
-        position: "sidebar",
+        position: 'sidebar',
       },
     },
     // This field is only used to populate the user data via the `populateAuthors` hook
     // This is because the `user` collection has access control locked to protect user privacy
     // GraphQL will also not return mutated user data that differs from the underlying schema
     {
-      name: "populatedAuthors",
-      type: "array",
+      name: 'populatedAuthors',
+      type: 'array',
       admin: {
         readOnly: true,
         disabled: true,
@@ -76,15 +76,15 @@ export const Posts: CollectionConfig = {
       },
       fields: [
         {
-          name: "id",
-          type: "text",
+          name: 'id',
+          type: 'text',
         },
         {
-          name: "name",
-          type: "text",
+          name: 'name',
+          type: 'text',
         },
       ],
     },
     slugField(),
   ],
-};
+}

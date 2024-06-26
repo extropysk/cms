@@ -1,55 +1,55 @@
-import { RowLabelArgs } from "payload/dist/admin/components/forms/RowLabel/types";
-import type { CollectionConfig } from "payload/types";
-import { anyone } from "../../../access/anyone";
-import { optionSelectField } from "../../../fields/optionSelect";
-import { priceField } from "../../../fields/price";
-import { validateUnique } from "../../../utilities/validate";
+import type { RowLabelArgs } from 'payload/dist/admin/components/forms/RowLabel/types'
+import type { CollectionConfig } from 'payload/types'
+import { anyone } from '../../../access/anyone'
+import { optionSelectField } from '../../../fields/optionSelect'
+import { priceField } from '../../../fields/price'
+import { validateUnique } from '../../../utilities/validate'
 
 export const Products: CollectionConfig = {
-  slug: "products",
+  slug: 'products',
   admin: {
-    group: "Shop",
-    useAsTitle: "name",
+    group: 'Shop',
+    useAsTitle: 'name',
   },
   access: {
     read: anyone,
   },
   fields: [
     {
-      name: "variants",
-      type: "array",
+      name: 'variants',
+      type: 'array',
       required: true,
       fields: [
         {
-          type: "row",
+          type: 'row',
           fields: [
             {
-              name: "title",
-              type: "text",
+              name: 'title',
+              type: 'text',
               required: true,
             },
             {
-              name: "disabled",
-              type: "checkbox",
+              name: 'disabled',
+              type: 'checkbox',
               admin: {
-                className: "field-flex-end",
+                className: 'field-flex-end',
               },
             },
           ],
         },
         priceField({ required: true }),
         {
-          name: "selectedOptions",
-          type: "array",
-          validate: validateUnique("operation"),
+          name: 'selectedOptions',
+          type: 'array',
+          validate: validateUnique('operation'),
           fields: [
             {
-              type: "row",
+              type: 'row',
               fields: [
                 {
-                  name: "option",
-                  type: "relationship",
-                  relationTo: "options",
+                  name: 'option',
+                  type: 'relationship',
+                  relationTo: 'options',
                   required: true,
                 },
                 optionSelectField(),
@@ -61,10 +61,10 @@ export const Products: CollectionConfig = {
       admin: {
         components: {
           RowLabel: ({ data, index }: RowLabelArgs) => {
-            return data?.title || `Slide ${String(index).padStart(2, "0")}`;
+            return data?.title || `Slide ${String(index).padStart(2, '0')}`
           },
         },
       },
     },
   ],
-};
+}

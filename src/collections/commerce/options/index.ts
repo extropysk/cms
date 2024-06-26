@@ -1,38 +1,38 @@
-import type { CollectionConfig } from "payload/types";
-import { anyone } from "../../../access/anyone";
+import type { CollectionConfig } from 'payload/types'
+import { anyone } from '../../../access/anyone'
 
 export const Options: CollectionConfig = {
-  slug: "options",
+  slug: 'options',
   admin: {
-    group: "Shop",
-    useAsTitle: "name",
+    group: 'Shop',
+    useAsTitle: 'name',
   },
   access: {
     read: anyone,
   },
   fields: [
     {
-      name: "name",
-      type: "text",
+      name: 'name',
+      type: 'text',
       required: true,
     },
 
     {
-      name: "values",
-      type: "array",
+      name: 'values',
+      type: 'array',
       required: true,
       fields: [
         {
-          type: "row",
+          type: 'row',
           fields: [
             {
-              type: "text",
-              name: "value",
+              type: 'text',
+              name: 'value',
               required: true,
             },
             {
-              type: "text",
-              name: "label",
+              type: 'text',
+              name: 'label',
               required: true,
             },
           ],
@@ -40,4 +40,4 @@ export const Options: CollectionConfig = {
       ],
     },
   ],
-};
+}

@@ -9,8 +9,8 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { $getSelection, $isRangeSelection } from 'lexical'
 
-import { $createLargeBodyNode, $isLargeBodyNode, LargeBodyNode } from './nodes/LargeBodyNode'
 import './index.scss'
+import { $createLargeBodyNode, $isLargeBodyNode, LargeBodyNode } from './nodes/LargeBodyNode'
 
 export const LargeBodyFeature = (): FeatureProvider => {
   return {
@@ -19,9 +19,8 @@ export const LargeBodyFeature = (): FeatureProvider => {
         sections: [
           FormatSectionWithEntries([
             {
-              ChildComponent: () =>
-                import('./Icon').then((module) => module.LargeBodyIcon),
-              isActive: ({ editor, selection }) => {
+              ChildComponent: () => import('./Icon').then(module => module.LargeBodyIcon),
+              isActive: ({ selection }) => {
                 if ($isRangeSelection(selection)) {
                   const selectedNode = getSelectedNode(selection)
                   const largeBodyParent = $findMatchingParent(selectedNode, $isLargeBodyNode)
@@ -57,10 +56,9 @@ export const LargeBodyFeature = (): FeatureProvider => {
           {
             options: [
               new SlashMenuOption(`Large Body`, {
-                Icon: () =>
-                  import('./Icon').then((module) => module.LargeBodyIcon),
+                Icon: () => import('./Icon').then(module => module.LargeBodyIcon),
                 keywords: ['largeBody'],
-                onSelect: ({ editor }) => {
+                onSelect: () => {
                   const selection = $getSelection()
                   if ($isRangeSelection(selection)) {
                     $setBlocksType(selection, () => $createLargeBodyNode())
