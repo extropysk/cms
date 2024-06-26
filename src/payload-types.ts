@@ -170,10 +170,12 @@ export interface Product {
 export interface Cart {
   id: string;
   name: string;
+  totalAmount?: number | null;
   lines?:
     | {
         product?: (string | null) | Product;
         variant: string;
+        quantity: number;
         id?: string | null;
       }[]
     | null;
