@@ -3,18 +3,46 @@ import type { CollectionConfig } from 'payload/types'
 import { anyone } from '../../../access/anyone'
 import { optionSelectField } from '../../../fields/optionSelect'
 import { priceField } from '../../../fields/price'
+import richText from '../../../fields/richText'
 import { validateUnique } from '../../../utilities/validate'
 
 export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
     group: 'Shop',
-    useAsTitle: 'name',
+    useAsTitle: 'title',
   },
   access: {
     read: anyone,
   },
   fields: [
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'disabled',
+          type: 'checkbox',
+          admin: {
+            className: 'field-flex-end',
+          },
+        },
+      ],
+    },
+    richText({ name: 'description' }),
+    {
+      name: 'tags',
+      type: 'relationship',
+      relationTo: 'tags',
+      hasMany: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
     {
       name: 'variants',
       type: 'array',
