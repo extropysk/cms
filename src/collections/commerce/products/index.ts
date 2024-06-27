@@ -8,6 +8,7 @@ import richText from '../../../fields/richText'
 import { validateUnique } from '../../../utilities/validate'
 import { syncProduct } from './hooks/stripe'
 import { OptionSelect } from './ui/optionSelect'
+import { StripeProduct } from './ui/stripeProduct'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -133,8 +134,11 @@ export const Products: CollectionConfig = {
       label: 'Stripe Product',
       type: 'text',
       admin: {
-        readOnly: true,
         position: 'sidebar',
+        readOnly: true,
+        components: {
+          Field: StripeProduct,
+        },
       },
     },
   ],
