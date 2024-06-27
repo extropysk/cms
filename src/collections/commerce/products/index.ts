@@ -7,6 +7,7 @@ import { priceField } from '../../../fields/price'
 import richText from '../../../fields/richText'
 import { validateUnique } from '../../../utilities/validate'
 import { OptionSelect } from './ui/optionSelect'
+import { ProductSelect } from './ui/productSelect'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -122,6 +123,16 @@ export const Products: CollectionConfig = {
       hasMany: true,
       admin: {
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'stripeProductID',
+      label: 'Stripe Product',
+      type: 'text',
+      admin: {
+        components: {
+          Field: ProductSelect,
+        },
       },
     },
   ],
