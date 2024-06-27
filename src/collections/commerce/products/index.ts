@@ -22,23 +22,99 @@ export const Products: CollectionConfig = {
   },
   fields: [
     {
-      type: 'row',
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-          name: 'title',
-          type: 'text',
-          required: true,
+          label: 'Detail',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'disabled',
+                  type: 'checkbox',
+                  admin: {
+                    className: 'field-flex-end',
+                  },
+                },
+              ],
+            },
+            richText({ name: 'description' }),
+            mediaField({}),
+          ],
         },
         {
-          name: 'disabled',
-          type: 'checkbox',
-          admin: {
-            className: 'field-flex-end',
-          },
+          label: 'Prices',
+          fields: [
+            {
+              name: 'variants',
+              type: 'array',
+              required: true,
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'title',
+                      type: 'text',
+                      required: true,
+                    },
+                    {
+                      name: 'disabled',
+                      type: 'checkbox',
+                      admin: {
+                        className: 'field-flex-end',
+                      },
+                    },
+                  ],
+                },
+                priceField({ required: true }),
+                {
+                  name: 'selectedOptions',
+                  type: 'array',
+                  validate: validateUnique('operation'),
+                  fields: [
+                    {
+                      type: 'row',
+                      fields: [
+                        {
+                          name: 'option',
+                          type: 'relationship',
+                          relationTo: 'options',
+                          required: true,
+                        },
+                        {
+                          name: 'value',
+                          type: 'text',
+                          required: true,
+                          admin: {
+                            components: {
+                              Field: OptionSelect,
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+              admin: {
+                components: {
+                  RowLabel: ({ data, index }: RowLabelArgs) => {
+                    return data?.title || `Slide ${String(index).padStart(2, '0')}`
+                  },
+                },
+              },
+            },
+          ],
         },
       ],
     },
-    richText({ name: 'description' }),
     {
       name: 'tags',
       type: 'relationship',
@@ -48,66 +124,5 @@ export const Products: CollectionConfig = {
         position: 'sidebar',
       },
     },
-    {
-      name: 'variants',
-      type: 'array',
-      required: true,
-      fields: [
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'title',
-              type: 'text',
-              required: true,
-            },
-            {
-              name: 'disabled',
-              type: 'checkbox',
-              admin: {
-                className: 'field-flex-end',
-              },
-            },
-          ],
-        },
-        priceField({ required: true }),
-        {
-          name: 'selectedOptions',
-          type: 'array',
-          validate: validateUnique('operation'),
-          fields: [
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'option',
-                  type: 'relationship',
-                  relationTo: 'options',
-                  required: true,
-                },
-                {
-                  name: 'value',
-                  type: 'text',
-                  required: true,
-                  admin: {
-                    components: {
-                      Field: OptionSelect,
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      ],
-      admin: {
-        components: {
-          RowLabel: ({ data, index }: RowLabelArgs) => {
-            return data?.title || `Slide ${String(index).padStart(2, '0')}`
-          },
-        },
-      },
-    },
-    mediaField({}),
   ],
 }
