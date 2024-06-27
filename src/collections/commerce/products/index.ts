@@ -47,6 +47,16 @@ export const Products: CollectionConfig = {
             },
             richText({ name: 'description' }),
             mediaField({}),
+            {
+              name: 'stripeProductID',
+              label: 'Stripe Product',
+              type: 'text',
+              admin: {
+                components: {
+                  Field: ProductSelect,
+                },
+              },
+            },
           ],
         },
         {
@@ -123,16 +133,6 @@ export const Products: CollectionConfig = {
       hasMany: true,
       admin: {
         position: 'sidebar',
-      },
-    },
-    {
-      name: 'stripeProductID',
-      label: 'Stripe Product',
-      type: 'text',
-      admin: {
-        components: {
-          Field: ProductSelect,
-        },
       },
     },
   ],

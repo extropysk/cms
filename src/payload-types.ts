@@ -144,6 +144,25 @@ export interface Option {
  */
 export interface Product {
   id: string;
+  title: string;
+  disabled?: boolean | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  media?: string | Media | null;
+  stripeProductID?: string | null;
   variants: {
     title: string;
     disabled?: boolean | null;
@@ -160,6 +179,7 @@ export interface Product {
       | null;
     id?: string | null;
   }[];
+  tags?: (string | Tag)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -173,7 +193,7 @@ export interface Cart {
   totalAmount?: number | null;
   lines?:
     | {
-        product?: (string | null) | Product;
+        product: string | Product;
         variant: string;
         quantity: number;
         id?: string | null;
