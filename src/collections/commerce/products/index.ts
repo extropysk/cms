@@ -3,10 +3,10 @@ import type { CollectionConfig } from 'payload/types'
 import { admins } from '../../../access/admins'
 import { anyone } from '../../../access/anyone'
 import { mediaField } from '../../../fields/media'
-import { optionSelectField } from '../../../fields/optionSelect'
 import { priceField } from '../../../fields/price'
 import richText from '../../../fields/richText'
 import { validateUnique } from '../../../utilities/validate'
+import { OptionSelect } from './ui/optionSelect'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -85,7 +85,16 @@ export const Products: CollectionConfig = {
                   relationTo: 'options',
                   required: true,
                 },
-                optionSelectField(),
+                {
+                  name: 'value',
+                  type: 'text',
+                  required: true,
+                  admin: {
+                    components: {
+                      Field: OptionSelect,
+                    },
+                  },
+                },
               ],
             },
           ],

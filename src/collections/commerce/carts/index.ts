@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload/types'
-import { variantSelectField } from '../../../fields/priceSelect'
 import { populateTotalAmount } from './hooks/populateTotalAmount'
+import { VariantSelect } from './ui/variantSelect'
 
 export const Carts: CollectionConfig = {
   slug: 'carts',
@@ -39,7 +39,16 @@ export const Carts: CollectionConfig = {
               relationTo: 'products',
               required: true,
             },
-            variantSelectField(),
+            {
+              name: 'variant',
+              type: 'text',
+              required: true,
+              admin: {
+                components: {
+                  Field: VariantSelect,
+                },
+              },
+            },
           ],
         },
         {
