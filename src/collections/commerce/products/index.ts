@@ -61,23 +61,6 @@ export const Products: CollectionConfig = {
               type: 'array',
               required: true,
               fields: [
-                {
-                  type: 'row',
-                  fields: [
-                    {
-                      name: 'title',
-                      type: 'text',
-                      required: true,
-                    },
-                    {
-                      name: 'disabled',
-                      type: 'checkbox',
-                      admin: {
-                        className: 'field-flex-end',
-                      },
-                    },
-                  ],
-                },
                 priceField({ required: true }),
                 {
                   name: 'selectedOptions',
