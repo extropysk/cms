@@ -162,13 +162,11 @@ export interface Product {
     [k: string]: unknown;
   } | null;
   media?: string | Media | null;
-  stripeProductID?: string | null;
   variants: {
-    title: string;
-    disabled?: boolean | null;
     price: {
       amount: number;
       currencyCode: 'eur';
+      synced?: boolean | null;
     };
     selectedOptions?:
       | {
@@ -180,6 +178,7 @@ export interface Product {
     id?: string | null;
   }[];
   tags?: (string | Tag)[] | null;
+  stripeProductID?: string | null;
   updatedAt: string;
   createdAt: string;
 }

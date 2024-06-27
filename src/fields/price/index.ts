@@ -1,4 +1,6 @@
 import type { Field } from 'payload/types'
+import { AmountInput } from './ui/amountInput'
+import { CurrencyCodeSelect } from './ui/currencyCodeSelect'
 
 enum Currency {
   EUR = 'eur',
@@ -20,6 +22,10 @@ export const priceField = ({ required }: Options): Field => ({
           type: 'number',
           required,
           min: 0,
+
+          admin: {
+            components: { Field: AmountInput },
+          },
         },
         {
           name: 'currencyCode',
@@ -30,6 +36,16 @@ export const priceField = ({ required }: Options): Field => ({
             label: currency,
             value: currency,
           })),
+          admin: {
+            components: { Field: CurrencyCodeSelect },
+          },
+        },
+        {
+          name: 'synced',
+          type: 'checkbox',
+          admin: {
+            // disabled: true,
+          },
         },
       ],
     },

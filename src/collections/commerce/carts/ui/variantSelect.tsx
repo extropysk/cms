@@ -1,14 +1,10 @@
 import { SelectInput, getSiblingData, useAllFormFields, useField } from 'payload/components/forms'
+import { SelectInputProps } from 'payload/dist/admin/components/forms/field-types/Select/Input'
 import { Product } from 'payload/generated-types'
-import { SelectField } from 'payload/types'
 import * as React from 'react'
 import { useFindById } from '../../../../hooks/query'
 
-type Props = SelectField & {
-  path: string
-}
-
-export const VariantSelect: React.FC<Props> = ({ path, label, required }) => {
+export const VariantSelect: React.FC<SelectInputProps> = ({ path, label, required }) => {
   const { value, setValue } = useField<string>({ path })
 
   const [fields] = useAllFormFields()
