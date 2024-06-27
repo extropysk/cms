@@ -1,6 +1,6 @@
 import type { Field } from 'payload/types'
-import { AmountInput } from './ui/amountInput'
-import { CurrencyCodeSelect } from './ui/currencyCodeSelect'
+import { CustomNumberField } from '../../components/ui/customNumberField'
+import { CustomSelectInput } from '../../components/ui/customSelectInput'
 
 enum Currency {
   EUR = 'eur',
@@ -8,6 +8,10 @@ enum Currency {
 
 interface Options {
   required?: boolean
+}
+
+const readOnly = ({ siblingData }: { siblingData: any }): boolean => {
+  return !!siblingData.stripePriceID
 }
 
 export const priceField = ({ required }: Options): Field => ({
@@ -22,9 +26,11 @@ export const priceField = ({ required }: Options): Field => ({
           type: 'number',
           required,
           min: 0,
-
+          custom: {
+            readOnly,
+          },
           admin: {
-            components: { Field: AmountInput },
+            components: { Field: CustomNumberField },
           },
         },
         {
@@ -36,15 +42,19 @@ export const priceField = ({ required }: Options): Field => ({
             label: currency,
             value: currency,
           })),
+          custom: {
+            readOnly,
+          },
           admin: {
-            components: { Field: CurrencyCodeSelect },
+            components: { Field: CustomSelectInput },
           },
         },
         {
-          name: 'synced',
-          type: 'checkbox',
+          name: 'stripePriceID',
+          type: 'text',
           admin: {
-            // disabled: true,
+            hidden: true,
+            readOnly: true,
           },
         },
       ],

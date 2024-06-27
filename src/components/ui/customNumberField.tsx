@@ -3,6 +3,7 @@ import DefaultLabel from 'payload/dist/admin/components/forms/Label'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { getSiblingData, useAllFormFields } from 'payload/components/forms'
 import DefaultError from 'payload/dist/admin/components/forms/Error'
 import FieldDescription from 'payload/dist/admin/components/forms/FieldDescription'
 import 'payload/dist/admin/components/forms/field-types/Number/index.scss'
@@ -13,32 +14,31 @@ import { NumberField } from 'payload/dist/fields/config/types'
 import { number } from 'payload/dist/fields/validations'
 import { getTranslation } from 'payload/dist/utilities/getTranslation'
 
-export type Props = Omit<NumberField, 'type' | 'hasMany' | 'minRows' | 'maxRows'> & {
+type Props = Omit<NumberField, 'type' | 'hasMany' | 'minRows' | 'maxRows'> & {
   path?: string
 }
 
-const Input: React.FC<Props> = props => {
-  const {
-    name,
-    admin: {
-      className,
-      components: { Error, Label, afterInput, beforeInput } = {},
-      condition,
-      description,
-      placeholder,
-      readOnly,
-      step,
-      style,
-      width,
-    } = {},
-    label,
-    max,
-    min,
-    path: pathFromProps,
-    required,
-    validate = number,
-  } = props
-
+const Component: React.FC<Props> = ({
+  name,
+  custom,
+  admin: {
+    className,
+    components: { Error, Label, afterInput, beforeInput } = {},
+    condition,
+    description,
+    placeholder,
+    readOnly,
+    step,
+    style,
+    width,
+  } = {},
+  label,
+  max,
+  min,
+  path: pathFromProps,
+  required,
+  validate = number,
+}) => {
   const ErrorComp = Error || DefaultError
   const LabelComp = Label || DefaultLabel
 
@@ -71,6 +71,11 @@ const Input: React.FC<Props> = props => {
     },
     [setValue],
   )
+
+  const [fields] = useAllFormFields()
+  const siblingData = getSiblingData(fields, path)
+
+  readOnly = readOnly || custom?.readOnly?.({ siblingData })
 
   return (
     <div
@@ -117,4 +122,4 @@ const Input: React.FC<Props> = props => {
   )
 }
 
-export const AmountInput = withCondition(Input)
+export const CustomNumberField = withCondition(Component)

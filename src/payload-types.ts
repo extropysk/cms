@@ -166,7 +166,7 @@ export interface Product {
     price: {
       amount: number;
       currencyCode: 'eur';
-      synced?: boolean | null;
+      stripePriceID?: string | null;
     };
     selectedOptions?:
       | {

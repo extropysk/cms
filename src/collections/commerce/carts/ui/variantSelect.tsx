@@ -18,7 +18,7 @@ export const VariantSelect: React.FC<SelectInputProps> = ({ path, label, require
       name={path}
       required={required}
       options={(data?.variants ?? []).map(variant => ({
-        label: variant.title,
+        label: `${variant.price.amount} ${variant.price.currencyCode}`,
         value: variant.id,
       }))}
       value={value}

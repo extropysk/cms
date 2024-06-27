@@ -13,7 +13,8 @@ import { Products } from './collections/commerce/products'
 import { Media } from './collections/common/media'
 import { Tags } from './collections/common/tags'
 import { Users } from './collections/common/users'
-import { QueryProvider } from './components/queryProvider'
+
+import { QueryProvider } from './components/providers/queryProvider'
 import { getStripeCustomers, getStripeProducts } from './endpoints/stripe'
 
 const generateTitle: GenerateTitle = () => {
