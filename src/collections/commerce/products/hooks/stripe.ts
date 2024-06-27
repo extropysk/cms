@@ -1,24 +1,24 @@
 import type { Product } from 'payload/generated-types'
-import type { CollectionBeforeChangeHook } from 'payload/types'
+import type { CollectionAfterDeleteHook, CollectionBeforeChangeHook } from 'payload/types'
 import { stripe } from '../../../../utilities/stripe'
 
-export const syncProduct: CollectionBeforeChangeHook<Product> = async ({ data }) => {
-  if (data.stripeProductID) {
-    await stripe.products.update(data.stripeProductID, {
-      name: data.title,
-      active: !data.disabled,
-    })
-  } else {
+export const syncProduct: CollectionBeforeChangeHook<Product> = async ({ data, operation }) => {
+  if (operation === 'create' || !data.stripeProductID) {
     const stripeProduct = await stripe.products.create({
       name: data.title,
       active: !data.disabled,
     })
     data.stripeProductID = stripeProduct.id
+  } else {
+    await stripe.products.update(data.stripeProductID, {
+      name: data.title,
+      active: !data.disabled,
+    })
   }
 
   data.variants = await Promise.all(
     data.variants.map(async variant => {
-      if (!variant.price.stripePriceID) {
+      if (operation === 'create' || !variant.price.stripePriceID) {
         const price = await stripe.prices.create({
           currency: variant.price.currencyCode,
           unit_amount: variant.price.amount * 100,
@@ -32,4 +32,12 @@ export const syncProduct: CollectionBeforeChangeHook<Product> = async ({ data })
   )
 
   return data
+}
+
+export const disableProduct: CollectionAfterDeleteHook<Product> = async ({ doc }) => {
+  if (doc.stripeProductID) {
+    await stripe.products.update(doc.stripeProductID, {
+      active: false,
+    })
+  }
 }

@@ -6,7 +6,7 @@ import { mediaField } from '../../../fields/media'
 import { priceField } from '../../../fields/price'
 import richText from '../../../fields/richText'
 import { validateUnique } from '../../../utilities/validate'
-import { syncProduct } from './hooks/stripe'
+import { disableProduct, syncProduct } from './hooks/stripe'
 import { OptionSelect } from './ui/optionSelect'
 import { StripeProduct } from './ui/stripeProduct'
 
@@ -24,6 +24,7 @@ export const Products: CollectionConfig = {
   },
   hooks: {
     beforeChange: [syncProduct],
+    afterDelete: [disableProduct],
   },
   fields: [
     {
