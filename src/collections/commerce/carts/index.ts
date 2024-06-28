@@ -25,11 +25,6 @@ export const Carts: CollectionConfig = {
   ],
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      required: true,
-    },
-    {
       name: 'totalAmount',
       type: 'number',
       hooks: {
