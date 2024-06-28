@@ -18,6 +18,7 @@ type AjaxMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 export const ajax = async <T>(method: AjaxMethod, url: string, data?: object): Promise<T> => {
   const response = await fetch(url, {
     method,
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',

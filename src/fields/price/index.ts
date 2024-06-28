@@ -1,4 +1,6 @@
 import type { Field } from 'payload/types'
+import { CustomNumberField } from '../../components/ui/customNumberField'
+import { CustomSelectInput } from '../../components/ui/customSelectInput'
 
 enum Currency {
   EUR = 'eur',
@@ -6,6 +8,10 @@ enum Currency {
 
 interface Options {
   required?: boolean
+}
+
+const readOnly = ({ siblingData }: { siblingData: any }): boolean => {
+  return !!siblingData.stripePriceID
 }
 
 export const priceField = ({ required }: Options): Field => ({
@@ -20,6 +26,12 @@ export const priceField = ({ required }: Options): Field => ({
           type: 'number',
           required,
           min: 0,
+          custom: {
+            readOnly,
+          },
+          admin: {
+            components: { Field: CustomNumberField },
+          },
         },
         {
           name: 'currencyCode',
@@ -30,6 +42,20 @@ export const priceField = ({ required }: Options): Field => ({
             label: currency,
             value: currency,
           })),
+          custom: {
+            readOnly,
+          },
+          admin: {
+            components: { Field: CustomSelectInput },
+          },
+        },
+        {
+          name: 'stripePriceID',
+          type: 'text',
+          admin: {
+            hidden: true,
+            readOnly: true,
+          },
         },
       ],
     },

@@ -26,7 +26,9 @@
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.19.2",
-    "payload": "^2.0.0"
+    "payload": "^2.0.0",
+    "stripe": "^16.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@payloadcms/eslint-config": "^0.0.1",

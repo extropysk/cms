@@ -1,6 +1,8 @@
 import type { CollectionConfig } from 'payload/types'
-import { variantSelectField } from '../../../fields/priceSelect'
+import { publicAndUser } from '../../../access/publicAndUser'
+import { checkout } from './endpoints/checkout'
 import { populateTotalAmount } from './hooks/populateTotalAmount'
+import { VariantSelect } from './ui/variantSelect'
 
 export const Carts: CollectionConfig = {
   slug: 'carts',
@@ -8,7 +10,19 @@ export const Carts: CollectionConfig = {
     group: 'Shop',
     useAsTitle: 'name',
   },
-  access: {},
+  access: {
+    read: publicAndUser,
+    create: publicAndUser,
+    update: publicAndUser,
+    delete: publicAndUser,
+  },
+  endpoints: [
+    {
+      path: '/:id/checkout',
+      method: 'post',
+      handler: checkout,
+    },
+  ],
   fields: [
     {
       name: 'name',
@@ -27,6 +41,16 @@ export const Carts: CollectionConfig = {
       },
     },
     {
+      name: 'user',
+      type: 'relationship',
+      relationTo: 'users',
+      defaultValue: ({ user }) => user?.id,
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
+    },
+    {
       type: 'array',
       name: 'lines',
       fields: [
@@ -39,7 +63,16 @@ export const Carts: CollectionConfig = {
               relationTo: 'products',
               required: true,
             },
-            variantSelectField(),
+            {
+              name: 'variant',
+              type: 'text',
+              required: true,
+              admin: {
+                components: {
+                  Field: VariantSelect,
+                },
+              },
+            },
           ],
         },
         {

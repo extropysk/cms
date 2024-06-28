@@ -13,7 +13,9 @@ import { Products } from './collections/commerce/products'
 import { Media } from './collections/common/media'
 import { Tags } from './collections/common/tags'
 import { Users } from './collections/common/users'
-import { QueryProvider } from './components/queryProvider'
+
+import { QueryProvider } from './components/providers/queryProvider'
+import { getStripeCustomers, getStripeProducts } from './endpoints/stripe'
 
 const generateTitle: GenerateTitle = () => {
   return 'My Store'
@@ -28,6 +30,18 @@ export default buildConfig({
     },
     css: path.resolve(__dirname, 'styles/global.scss'),
   },
+  endpoints: [
+    {
+      path: '/stripe/products',
+      method: 'get',
+      handler: getStripeProducts,
+    },
+    {
+      path: '/stripe/customers',
+      method: 'get',
+      handler: getStripeCustomers,
+    },
+  ],
   editor: lexicalEditor({}),
   collections: [Posts, Tags, Media, Users, Options, Products, Carts],
   typescript: {
@@ -39,6 +53,12 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  cors: '*',
+  csrf: [],
+  rateLimit: {
+    trustProxy: true,
+  },
   plugins: [
     seo({
       collections: ['posts'],

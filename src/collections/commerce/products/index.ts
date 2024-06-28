@@ -3,10 +3,12 @@ import type { CollectionConfig } from 'payload/types'
 import { admins } from '../../../access/admins'
 import { anyone } from '../../../access/anyone'
 import { mediaField } from '../../../fields/media'
-import { optionSelectField } from '../../../fields/optionSelect'
 import { priceField } from '../../../fields/price'
 import richText from '../../../fields/richText'
 import { validateUnique } from '../../../utilities/validate'
+import { disableProduct, syncProduct } from './hooks/stripe'
+import { OptionSelect } from './ui/optionSelect'
+import { StripeProduct } from './ui/stripeProduct'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -20,25 +22,88 @@ export const Products: CollectionConfig = {
     update: admins,
     delete: admins,
   },
+  hooks: {
+    beforeChange: [syncProduct],
+    afterDelete: [disableProduct],
+  },
   fields: [
     {
-      type: 'row',
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-          name: 'title',
-          type: 'text',
-          required: true,
+          label: 'Detail',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'disabled',
+                  type: 'checkbox',
+                  admin: {
+                    className: 'field-flex-end',
+                  },
+                },
+              ],
+            },
+            richText({ name: 'description' }),
+            mediaField({}),
+          ],
         },
         {
-          name: 'disabled',
-          type: 'checkbox',
-          admin: {
-            className: 'field-flex-end',
-          },
+          label: 'Prices',
+          fields: [
+            {
+              name: 'variants',
+              type: 'array',
+              required: true,
+              fields: [
+                priceField({ required: true }),
+                {
+                  name: 'selectedOptions',
+                  type: 'array',
+                  validate: validateUnique('operation'),
+                  fields: [
+                    {
+                      type: 'row',
+                      fields: [
+                        {
+                          name: 'option',
+                          type: 'relationship',
+                          relationTo: 'options',
+                          required: true,
+                        },
+                        {
+                          name: 'value',
+                          type: 'text',
+                          required: true,
+                          admin: {
+                            components: {
+                              Field: OptionSelect,
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+              admin: {
+                components: {
+                  RowLabel: ({ data, index }: RowLabelArgs) => {
+                    return data?.title || `Slide ${String(index).padStart(2, '0')}`
+                  },
+                },
+              },
+            },
+          ],
         },
       ],
     },
-    richText({ name: 'description' }),
     {
       name: 'tags',
       type: 'relationship',
@@ -49,56 +114,16 @@ export const Products: CollectionConfig = {
       },
     },
     {
-      name: 'variants',
-      type: 'array',
-      required: true,
-      fields: [
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'title',
-              type: 'text',
-              required: true,
-            },
-            {
-              name: 'disabled',
-              type: 'checkbox',
-              admin: {
-                className: 'field-flex-end',
-              },
-            },
-          ],
-        },
-        priceField({ required: true }),
-        {
-          name: 'selectedOptions',
-          type: 'array',
-          validate: validateUnique('operation'),
-          fields: [
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'option',
-                  type: 'relationship',
-                  relationTo: 'options',
-                  required: true,
-                },
-                optionSelectField(),
-              ],
-            },
-          ],
-        },
-      ],
+      name: 'stripeProductID',
+      label: 'Stripe Product',
+      type: 'text',
       admin: {
+        position: 'sidebar',
+        readOnly: true,
         components: {
-          RowLabel: ({ data, index }: RowLabelArgs) => {
-            return data?.title || `Slide ${String(index).padStart(2, '0')}`
-          },
+          Field: StripeProduct,
         },
       },
     },
-    mediaField({}),
   ],
 }
