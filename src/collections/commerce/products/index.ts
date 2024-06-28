@@ -4,7 +4,6 @@ import { admins } from '../../../access/admins'
 import { anyone } from '../../../access/anyone'
 import { mediaField } from '../../../fields/media'
 import { priceField } from '../../../fields/price'
-import richText from '../../../fields/richText'
 import { validateUnique } from '../../../utilities/validate'
 import { disableProduct, syncProduct } from './hooks/stripe'
 import { OptionSelect } from './ui/optionSelect'
@@ -50,8 +49,12 @@ export const Products: CollectionConfig = {
                 },
               ],
             },
-            richText({ name: 'description' }),
-            mediaField({}),
+            {
+              type: 'textarea',
+              name: 'description',
+              required: true,
+            },
+            mediaField({ required: true }),
           ],
         },
         {

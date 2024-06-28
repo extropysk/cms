@@ -146,22 +146,8 @@ export interface Product {
   id: string;
   title: string;
   disabled?: boolean | null;
-  description?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  media?: string | Media | null;
+  description: string;
+  media: string | Media;
   variants: {
     price: {
       amount: number;
@@ -190,6 +176,7 @@ export interface Cart {
   id: string;
   name: string;
   totalAmount?: number | null;
+  user?: (string | null) | User;
   lines?:
     | {
         product: string | Product;
