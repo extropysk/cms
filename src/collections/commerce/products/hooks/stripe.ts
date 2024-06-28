@@ -7,12 +7,14 @@ export const syncProduct: CollectionBeforeChangeHook<Product> = async ({ data, o
     const stripeProduct = await stripe.products.create({
       name: data.title,
       active: !data.disabled,
+      description: data.description,
     })
     data.stripeProductID = stripeProduct.id
   } else {
     await stripe.products.update(data.stripeProductID, {
       name: data.title,
       active: !data.disabled,
+      description: data.description,
     })
   }
 
