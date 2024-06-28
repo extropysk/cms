@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload/types'
+import { publicAndUser } from '../../../access/publicAndUser'
 import { getCheckout } from './endpoints/checkout'
 import { populateTotalAmount } from './hooks/populateTotalAmount'
 import { VariantSelect } from './ui/variantSelect'
@@ -9,7 +10,12 @@ export const Carts: CollectionConfig = {
     group: 'Shop',
     useAsTitle: 'name',
   },
-  access: {},
+  access: {
+    read: publicAndUser,
+    create: publicAndUser,
+    update: publicAndUser,
+    delete: publicAndUser,
+  },
   endpoints: [
     {
       path: '/:id/checkout',
@@ -29,6 +35,16 @@ export const Carts: CollectionConfig = {
       hooks: {
         beforeChange: [populateTotalAmount],
       },
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'user',
+      type: 'relationship',
+      relationTo: 'users',
+      defaultValue: ({ user }) => user?.id,
       admin: {
         readOnly: true,
         position: 'sidebar',
