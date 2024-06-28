@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload/types'
 import { publicAndUser } from '../../../access/publicAndUser'
-import { getCheckout } from './endpoints/checkout'
+import { checkout } from './endpoints/checkout'
 import { populateTotalAmount } from './hooks/populateTotalAmount'
 import { VariantSelect } from './ui/variantSelect'
 
@@ -19,8 +19,8 @@ export const Carts: CollectionConfig = {
   endpoints: [
     {
       path: '/:id/checkout',
-      method: 'get',
-      handler: getCheckout,
+      method: 'post',
+      handler: checkout,
     },
   ],
   fields: [
