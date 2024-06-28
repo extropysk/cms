@@ -13,7 +13,7 @@ import { Products } from './collections/commerce/products'
 import { Media } from './collections/common/media'
 import { Users } from './collections/common/users'
 
-import { Categories } from './collections/common/tags'
+import { Categories } from './collections/common/categories'
 import { QueryProvider } from './components/providers/queryProvider'
 import { getStripeCustomers, getStripeProducts } from './endpoints/stripe'
 

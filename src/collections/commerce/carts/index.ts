@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload/types'
-import { publicAndUser } from '../../../access/publicAndUser'
+import { anyone } from '../../../access/anyone'
 import { checkout } from './endpoints/checkout'
 import { populateTotalAmount } from './hooks/populateTotalAmount'
 import { VariantSelect } from './ui/variantSelect'
@@ -11,10 +11,10 @@ export const Carts: CollectionConfig = {
     useAsTitle: 'name',
   },
   access: {
-    read: publicAndUser,
-    create: publicAndUser,
-    update: publicAndUser,
-    delete: publicAndUser,
+    read: anyone,
+    create: anyone,
+    update: anyone,
+    delete: anyone,
   },
   endpoints: [
     {
