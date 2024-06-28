@@ -19,11 +19,13 @@ export const populatePrice: CollectionBeforeChangeHook<Cart> = async ({
   )
 
   let totalAmount = 0
+  let totalQuantity = 0
   data.lines.forEach(line => {
     const product =
       typeof line.product === 'object' ? line.product : products.find(p => p.id === line.product)
     const variant = product.variants.find(v => v.id === line.variant)
     totalAmount += line.quantity * variant.price.amount
+    totalQuantity += line.quantity
     if (currencyCode) {
       if (currencyCode !== variant.price.currencyCode) {
         throw new APIError('multiple currencies', 400)
@@ -36,5 +38,6 @@ export const populatePrice: CollectionBeforeChangeHook<Cart> = async ({
   data.totalAmount = totalAmount
   data.currencyCode = currencyCode
   data.totalTaxAmount = 0 * totalAmount
+  data.totalQuantity = totalQuantity
   return data
 }

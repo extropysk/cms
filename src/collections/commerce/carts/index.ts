@@ -52,6 +52,14 @@ export const Carts: CollectionConfig = {
       },
     },
     {
+      name: 'totalQuantity',
+      type: 'number',
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'user',
       type: 'relationship',
       relationTo: 'users',
