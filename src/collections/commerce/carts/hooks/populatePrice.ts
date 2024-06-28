@@ -1,7 +1,12 @@
+import { APIError } from 'payload/errors'
 import type { Cart } from 'payload/generated-types'
-import type { FieldHook } from 'payload/types'
+import type { CollectionBeforeChangeHook } from 'payload/types'
 
-export const populateTotalAmount: FieldHook<Cart> = async ({ data, req: { payload } }) => {
+export const populatePrice: CollectionBeforeChangeHook<Cart> = async ({
+  data,
+  req: { payload },
+}) => {
+  let currencyCode
   const products = await Promise.all(
     data.lines.map(line => {
       return typeof line.product === 'object'
@@ -19,7 +24,17 @@ export const populateTotalAmount: FieldHook<Cart> = async ({ data, req: { payloa
       typeof line.product === 'object' ? line.product : products.find(p => p.id === line.product)
     const variant = product.variants.find(v => v.id === line.variant)
     totalAmount += line.quantity * variant.price.amount
+    if (currencyCode) {
+      if (currencyCode !== variant.price.currencyCode) {
+        throw new APIError('multiple currencies', 400)
+      }
+    } else {
+      currencyCode = variant.price.currencyCode
+    }
   })
 
-  return totalAmount
+  data.totalAmount = totalAmount
+  data.currencyCode = currencyCode
+  data.totalTaxAmount = 0 * totalAmount
+  return data
 }

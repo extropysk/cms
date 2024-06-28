@@ -177,6 +177,8 @@ export interface Product {
 export interface Cart {
   id: string;
   totalAmount?: number | null;
+  totalTaxAmount?: number | null;
+  currencyCode?: string | null;
   user?: (string | null) | User;
   lines?:
     | {

@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload/types'
 import { anyone } from '../../../access/anyone'
 import { checkout } from './endpoints/checkout'
-import { populateTotalAmount } from './hooks/populateTotalAmount'
+import { populatePrice } from './hooks/populatePrice'
 import { VariantSelect } from './ui/variantSelect'
 
 export const Carts: CollectionConfig = {
@@ -16,6 +16,9 @@ export const Carts: CollectionConfig = {
     update: anyone,
     delete: anyone,
   },
+  hooks: {
+    beforeChange: [populatePrice],
+  },
   endpoints: [
     {
       path: '/:id/checkout',
@@ -27,9 +30,22 @@ export const Carts: CollectionConfig = {
     {
       name: 'totalAmount',
       type: 'number',
-      hooks: {
-        beforeChange: [populateTotalAmount],
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
       },
+    },
+    {
+      name: 'totalTaxAmount',
+      type: 'number',
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'currencyCode',
+      type: 'text',
       admin: {
         readOnly: true,
         position: 'sidebar',
