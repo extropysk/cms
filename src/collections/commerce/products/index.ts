@@ -108,9 +108,17 @@ export const Products: CollectionConfig = {
       ],
     },
     {
-      name: 'tags',
+      name: 'categories',
       type: 'relationship',
-      relationTo: 'tags',
+      relationTo: 'categories',
+      hasMany: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'tags',
+      type: 'text',
       hasMany: true,
       admin: {
         position: 'sidebar',

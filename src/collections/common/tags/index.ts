@@ -2,10 +2,10 @@ import type { CollectionConfig } from 'payload/types'
 import { admins } from '../../../access/admins'
 import { anyone } from '../../../access/anyone'
 
-export const Tags: CollectionConfig = {
-  slug: 'tags',
+export const Categories: CollectionConfig = {
+  slug: 'categories',
   admin: {
-    useAsTitle: 'name',
+    useAsTitle: 'title',
   },
   access: {
     read: anyone,
@@ -15,7 +15,7 @@ export const Tags: CollectionConfig = {
   },
   fields: [
     {
-      name: 'name',
+      name: 'title',
       type: 'text',
       required: true,
     },

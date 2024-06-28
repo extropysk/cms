@@ -35,9 +35,9 @@ export const Posts: CollectionConfig = {
     },
     richText({ name: 'content' }),
     {
-      name: 'tags',
+      name: 'categories',
       type: 'relationship',
-      relationTo: 'tags',
+      relationTo: 'categories',
       hasMany: true,
       admin: {
         position: 'sidebar',
