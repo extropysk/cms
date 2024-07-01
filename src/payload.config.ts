@@ -13,9 +13,11 @@ import { Products } from './collections/commerce/products'
 import { Media } from './collections/common/media'
 import { Users } from './collections/common/users'
 
+import stripePlugin from '@payloadcms/plugin-stripe'
 import { Categories } from './collections/common/categories'
 import { QueryProvider } from './components/providers/queryProvider'
 import { getStripeCustomers, getStripeProducts } from './endpoints/stripe'
+import { productUpdated } from './webhooks/stripe'
 
 const generateTitle: GenerateTitle = () => {
   return 'My Store'
@@ -65,16 +67,16 @@ export default buildConfig({
       generateTitle,
       uploadsCollection: 'media',
     }),
-    // stripePlugin({
-    //   stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',
-    //   isTestKey: true,
-    //   stripeWebhooksEndpointSecret: process.env.STRIPE_WEBHOOKS_SIGNING_SECRET,
-    //   rest: false,
-    //   webhooks: {
-    //     // 'product.created': productUpdated,
-    //     'product.updated': productUpdated,
-    //     // 'price.updated': priceUpdated,
-    //   },
-    // }),
+    stripePlugin({
+      stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',
+      isTestKey: true,
+      stripeWebhooksEndpointSecret: process.env.STRIPE_WEBHOOKS_SIGNING_SECRET,
+      rest: false,
+      webhooks: {
+        // 'product.created': productUpdated,
+        'product.updated': productUpdated,
+        // 'price.updated': priceUpdated,
+      },
+    }),
   ],
 })
