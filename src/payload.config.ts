@@ -65,5 +65,16 @@ export default buildConfig({
       generateTitle,
       uploadsCollection: 'media',
     }),
+    // stripePlugin({
+    //   stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',
+    //   isTestKey: true,
+    //   stripeWebhooksEndpointSecret: process.env.STRIPE_WEBHOOKS_SIGNING_SECRET,
+    //   rest: false,
+    //   webhooks: {
+    //     // 'product.created': productUpdated,
+    //     'product.updated': productUpdated,
+    //     // 'price.updated': priceUpdated,
+    //   },
+    // }),
   ],
 })

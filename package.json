@@ -21,6 +21,7 @@
     "@payloadcms/bundler-webpack": "^1.0.0",
     "@payloadcms/db-mongodb": "^1.0.0",
     "@payloadcms/plugin-seo": "^2.3.2",
+    "@payloadcms/plugin-stripe": "^0.0.19",
     "@payloadcms/richtext-lexical": "^0.11.1",
     "@tanstack/react-query": "^5.45.1",
     "cross-env": "^7.0.3",
