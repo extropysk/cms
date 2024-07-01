@@ -69,11 +69,10 @@ export default buildConfig({
     }),
     stripePlugin({
       stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',
-      isTestKey: true,
+      isTestKey: process.env.STRIPE_SECRET_KEY?.startsWith('sk_test_'),
       stripeWebhooksEndpointSecret: process.env.STRIPE_WEBHOOKS_SIGNING_SECRET,
       rest: false,
       webhooks: {
-        // 'product.created': productUpdated,
         'product.updated': productUpdated,
         'price.updated': priceUpdated,
       },

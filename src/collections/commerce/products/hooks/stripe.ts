@@ -3,6 +3,10 @@ import type { CollectionAfterDeleteHook, CollectionBeforeChangeHook } from 'payl
 import { stripe } from '../../../../utilities/stripe'
 
 export const syncProduct: CollectionBeforeChangeHook<Product> = async ({ data, operation }) => {
+  if (data.skipSync) {
+    return { ...data, skipSync: false }
+  }
+
   if (operation === 'create' || !data.stripeProductID) {
     const stripeProduct = await stripe.products.create({
       name: data.title,
