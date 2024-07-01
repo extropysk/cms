@@ -167,6 +167,7 @@ export interface Product {
   categories?: (string | Category)[] | null;
   tags?: string[] | null;
   stripeProductID?: string | null;
+  skipSync?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }

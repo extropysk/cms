@@ -17,7 +17,7 @@ import stripePlugin from '@payloadcms/plugin-stripe'
 import { Categories } from './collections/common/categories'
 import { QueryProvider } from './components/providers/queryProvider'
 import { getStripeCustomers, getStripeProducts } from './endpoints/stripe'
-import { productUpdated } from './webhooks/stripe'
+import { priceUpdated, productUpdated } from './webhooks/stripe'
 
 const generateTitle: GenerateTitle = () => {
   return 'My Store'
@@ -75,7 +75,7 @@ export default buildConfig({
       webhooks: {
         // 'product.created': productUpdated,
         'product.updated': productUpdated,
-        // 'price.updated': priceUpdated,
+        'price.updated': priceUpdated,
       },
     }),
   ],

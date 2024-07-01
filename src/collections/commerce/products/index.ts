@@ -136,5 +136,15 @@ export const Products: CollectionConfig = {
         },
       },
     },
+    {
+      name: 'skipSync',
+      label: 'Skip Sync',
+      type: 'checkbox',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        hidden: true,
+      },
+    },
   ],
 }

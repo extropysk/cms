@@ -47,6 +47,7 @@ export const Carts: CollectionConfig = {
       name: 'currencyCode',
       type: 'text',
       admin: {
+        disabled: true,
         readOnly: true,
         position: 'sidebar',
       },
@@ -55,6 +56,7 @@ export const Carts: CollectionConfig = {
       name: 'totalQuantity',
       type: 'number',
       admin: {
+        disabled: true,
         readOnly: true,
         position: 'sidebar',
       },
