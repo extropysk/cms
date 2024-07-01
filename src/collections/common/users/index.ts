@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload/types'
 import { admins } from '../../../access/admins'
 import { adminsAndUser } from '../../../access/adminsAndUser'
 import { anyone } from '../../../access/anyone'
-import { checkRole } from '../../../access/checkRole'
 import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
 import { loginAfterCreate } from './hooks/loginAfterCreate'
 
@@ -17,7 +16,6 @@ export const Users: CollectionConfig = {
     create: anyone,
     update: adminsAndUser,
     delete: admins,
-    admin: ({ req: { user } }) => checkRole(['admin'], user),
   },
   hooks: {
     afterChange: [loginAfterCreate],
