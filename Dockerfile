@@ -24,4 +24,7 @@ COPY --from=builder /home/node/app/build ./build
 
 EXPOSE 3000
 
+ARG VERSION
+ENV APP_VERSION=$VERSION
+
 CMD ["node", "dist/server.js"]
