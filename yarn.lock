@@ -989,6 +989,13 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
+"@extropysk/payload@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@extropysk/payload/-/payload-0.0.7.tgz#5b5f487d05079cf7c4b8338d95a3ec4d45cf9ac8"
+  integrity sha512-QxvxuKh+gX+FnM8gRz78Z2DAHrS+ecy7+ECd1mTn980QWWQy9qhknjDqdeDEAjm3yXR9VSLuInQdFILjT44pyg==
+  dependencies:
+    qs "^6.12.3"
+
 "@faceless-ui/modal@2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@faceless-ui/modal/-/modal-2.0.1.tgz#8a47299442eff450c09432cfaef35c5471becad6"
@@ -7091,6 +7098,13 @@ qs@^6.11.0, qs@^6.9.1:
   version "6.12.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.12.1.tgz#39422111ca7cbdb70425541cba20c7d7b216599a"
   integrity sha512-zWmv4RSuB9r2mYQw3zxQuHWeU+42aKi1wWig/j4ele4ygELZ7PEO6MM7rim9oAQH2A5MWfsAVf/jPvTPgCbvUQ==
+  dependencies:
+    side-channel "^1.0.6"
+
+qs@^6.12.3:
+  version "6.12.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.12.3.tgz#e43ce03c8521b9c7fd7f1f13e514e5ca37727754"
+  integrity sha512-AWJm14H1vVaO/iNZ4/hO+HyaTehuy9nRqVdkTqlJt0HWvBiBIEXFmb4C0DGeYo3Xes9rrEW+TxHsaigCbN5ICQ==
   dependencies:
     side-channel "^1.0.6"
 

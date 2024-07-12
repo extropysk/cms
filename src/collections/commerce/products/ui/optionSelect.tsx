@@ -1,8 +1,7 @@
 import { SelectInput, getSiblingData, useAllFormFields, useField } from 'payload/components/forms'
 import { SelectInputProps } from 'payload/dist/admin/components/forms/field-types/Select/Input'
-import { Option } from 'payload/generated-types'
 import * as React from 'react'
-import { useFindById } from '../../../../hooks/query'
+import { useFindByID } from '../../../../hooks/query'
 
 export const OptionSelect: React.FC<SelectInputProps> = ({ path, label, required }) => {
   const { value, setValue } = useField<string>({ path })
@@ -10,7 +9,7 @@ export const OptionSelect: React.FC<SelectInputProps> = ({ path, label, required
   const [fields] = useAllFormFields()
   const siblingData = getSiblingData(fields, path)
 
-  const { data } = useFindById<Option>('options', siblingData.option)
+  const { data } = useFindByID('options', siblingData.option)
 
   return (
     <SelectInput

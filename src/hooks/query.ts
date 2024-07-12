@@ -1,20 +1,19 @@
-import type { UseQueryResult } from '@tanstack/react-query'
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import type { BaseParams } from '@extropysk/payload'
 import { useQuery } from '@tanstack/react-query'
 import type { Config } from 'payload/generated-types'
-import type { AjaxError } from '../utilities/ajax'
-import { ajax } from '../utilities/ajax'
+import { payload } from '../utilities/payload'
 
 type Collection = keyof Config['collections']
 
-export const useFindById = <T>(
-  collection: Collection,
+export const useFindByID = <Key extends Collection>(
+  collection: Key,
   id?: string,
-): UseQueryResult<T, AjaxError> => {
-  const url = `/api/${collection}/${id}`
-
+  params?: BaseParams,
+) => {
   return useQuery({
-    queryKey: [collection, id],
-    queryFn: () => ajax<T>('GET', url),
+    queryKey: [collection, id, params],
+    queryFn: () => payload.findByID(collection, id, params),
     enabled: !!id,
   })
 }
