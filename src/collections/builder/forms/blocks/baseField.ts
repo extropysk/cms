@@ -27,7 +27,7 @@ export const baseField = ({ slug, type = 'text', fields = [] }: Options): Block 
       type: 'row',
       fields: [
         {
-          name: 'default',
+          name: 'defaultValue',
           type: type as any,
         },
         {
