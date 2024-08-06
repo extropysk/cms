@@ -8,6 +8,7 @@
 
 export interface Config {
   collections: {
+    forms: Form;
     posts: Post;
     categories: Category;
     media: Media;
@@ -19,6 +20,66 @@ export interface Config {
     'payload-migrations': PayloadMigration;
   };
   globals: {};
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forms".
+ */
+export interface Form {
+  id: string;
+  title: string;
+  fields: (
+    | {
+        name: string;
+        label?: string | null;
+        default?: string | null;
+        required?: boolean | null;
+        minLength?: number | null;
+        maxLength?: number | null;
+        pattern?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'text-field';
+      }
+    | {
+        name: string;
+        label?: string | null;
+        default?: number | null;
+        required?: boolean | null;
+        min?: number | null;
+        max?: number | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'number-field';
+      }
+    | {
+        name: string;
+        label?: string | null;
+        default?: boolean | null;
+        required?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'checkbox-field';
+      }
+    | {
+        name: string;
+        label?: string | null;
+        default?: string | null;
+        required?: boolean | null;
+        options?:
+          | {
+              value: string;
+              label?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'select-field';
+      }
+  )[];
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

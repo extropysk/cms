@@ -7,13 +7,13 @@ import type { GenerateTitle } from '@payloadcms/plugin-seo/dist/types'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload/config'
 import { Posts } from './collections/blog/posts'
+import { Forms } from './collections/builder/forms'
 import { Carts } from './collections/commerce/carts'
 import { Options } from './collections/commerce/options'
 import { Products } from './collections/commerce/products'
+import { Categories } from './collections/common/categories'
 import { Media } from './collections/common/media'
 import { Users } from './collections/common/users'
-
-import { Categories } from './collections/common/categories'
 import { QueryProvider } from './components/providers/queryProvider'
 import { getStripeCustomers, getStripeProducts } from './endpoints/stripe'
 
@@ -43,7 +43,7 @@ export default buildConfig({
     },
   ],
   editor: lexicalEditor({}),
-  collections: [Posts, Categories, Media, Users, Options, Products, Carts],
+  collections: [Forms, Posts, Categories, Media, Users, Options, Products, Carts],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
