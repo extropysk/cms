@@ -19,13 +19,19 @@ export const checkout = handler<Schema>(
 
     const session = await stripe.checkout.sessions.create({
       line_items: cart.lines.map(line => {
-        const variant = (line.product as Product).variants.find(v => v.id === line.variant)
-        if (!variant?.price?.stripePriceID) {
-          throw new Error('Price ID not found')
+        const product = line.product as Product
+        const variant = product.variants.find(v => v.id === line.variant)
+        if (!variant) {
+          throw new Error('Price not found')
         }
 
         return {
-          price: variant.price.stripePriceID,
+          price_data: {
+            currency: variant.price.currencyCode,
+            unit_amount: variant.price.amount * 100,
+            product: product.stripeProductID,
+          },
+
           quantity: line.quantity,
         }
       }),

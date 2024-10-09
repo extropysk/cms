@@ -32,7 +32,7 @@ export interface Form {
     | {
         name: string;
         label?: string | null;
-        default?: string | null;
+        defaultValue?: string | null;
         required?: boolean | null;
         minLength?: number | null;
         maxLength?: number | null;
@@ -44,7 +44,7 @@ export interface Form {
     | {
         name: string;
         label?: string | null;
-        default?: number | null;
+        defaultValue?: number | null;
         required?: boolean | null;
         min?: number | null;
         max?: number | null;
@@ -55,7 +55,7 @@ export interface Form {
     | {
         name: string;
         label?: string | null;
-        default?: boolean | null;
+        defaultValue?: boolean | null;
         required?: boolean | null;
         id?: string | null;
         blockName?: string | null;
@@ -64,7 +64,7 @@ export interface Form {
     | {
         name: string;
         label?: string | null;
-        default?: string | null;
+        defaultValue?: string | null;
         required?: boolean | null;
         options?:
           | {
@@ -214,7 +214,6 @@ export interface Product {
     price: {
       amount: number;
       currencyCode: 'eur';
-      stripePriceID?: string | null;
     };
     selectedOptions?:
       | {
